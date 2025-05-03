@@ -21,4 +21,6 @@ imaging adding to the public CEERS legacy data and enabling an even broader rang
 
 ![SPAM-can-logo](https://github.com/user-attachments/assets/418f0c6d-fd9b-4add-87b5-98308d1a1bb0)
 
+Logo by Julie Wakefiled, UConn Design Center
+
 
