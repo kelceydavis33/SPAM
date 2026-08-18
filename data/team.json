@@ -6,7 +6,310 @@
         {
           "name": "Kelcey Davis",
           "role": "PI",
-          "affiliations": ["Department of Physics, University of Connecticut, Storrs, CT 06269, USA"]
+          "affiliations": [
+            "Department of Physics, 196A Auditorium Road, Unit 3046, University of Connecticut, Storrs, CT 06269, USA",
+            "Los Alamos National Laboratory, Los Alamos, NM 87545, USA"
+          ],
+          "notes": [
+            "NSF Graduate Research Fellow"
+          ]
+        },
+        {
+          "name": "Rebecca L. Larson",
+          "role": "Co-PI",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA"
+          ],
+          "notes": [
+            "Giacconi Postdoctoral Fellow"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Architects",
+      "members": [
+        {
+          "name": "Hollis B. Akins",
+          "affiliations": [
+            "Department of Astronomy, The University of Texas at Austin, 2515 Speedway Blvd Stop C1400, Austin, TX 78712, USA",
+            "Cosmic Frontier Center, The University of Texas at Austin, Austin, TX 78712, USA",
+            "Department of Astrophysical Sciences, Princeton University, 4 Ivy Lane, Princeton, NJ 08544, USA"
+          ],
+          "notes": [
+            "NSF Graduate Research Fellow",
+            "NASA Einstein Fellow"
+          ]
+        },
+        {
+          "name": "Steven L. Finkelstein",
+          "affiliations": [
+            "Department of Astronomy, The University of Texas at Austin, Austin, TX, USA",
+            "Cosmic Frontier Center, The University of Texas at Austin, Austin, TX, USA"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Team",
+      "members": [
+        {
+          "name": "Jacqueline Antwi-Danso",
+          "affiliations": [
+            "University of Toronto, 50 St George St,Toronto, ON, M5S 3H4, Canada"
+          ],
+          "notes": [
+            "Dunlap Postdoctoral Fellow"
+          ]
+        },
+        {
+          "name": "Bren E. Backhaus",
+          "affiliations": [
+            "Department of Physics and Astronomy, University of Kansas, Lawrence, KS 66045, USA"
+          ]
+        },
+        {
+          "name": "Micaela B. Bagley",
+          "affiliations": [
+            "Southeastern Universities Research Association, Washington, DC 20005, USA",
+            "Astrophysics Science Division, NASA Goddard Space Flight Center, Greenbelt, MD 20771, USA",
+            "Department of Astronomy, The University of Texas at Austin, Austin, TX, USA"
+          ]
+        },
+        {
+          "name": "Guillermo Barro",
+          "affiliations": [
+            "University of the Pacific, Stockton, CA 90340 USA"
+          ]
+        },
+        {
+          "name": "Laura Bisigello",
+          "affiliations": [
+            "INAF-Osservatorio Astronomico di Padova, Via dell'Osservatorio 5, 35122 Padova, Italy"
+          ]
+        },
+        {
+          "name": "Madisyn Brooks",
+          "affiliations": [
+            "Department of Physics, 196A Auditorium Road, Unit 3046, University of Connecticut, Storrs, CT 06269, USA"
+          ],
+          "notes": [
+            "NSF Graduate Research Fellow"
+          ]
+        },
+        {
+          "name": "Jaclyn B. Champagne",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA"
+          ]
+        },
+        {
+          "name": "Yingjie Cheng",
+          "affiliations": [
+            "Department of Astronomy, University of Washington, Seattle, WA 98195, USA"
+          ]
+        },
+        {
+          "name": "Katherine Chworowsky",
+          "affiliations": [
+            "Department of Astronomy, The University of Texas at Austin, Austin, TX 78712 USA",
+            "Cosmic Frontier Center, The University of Texas at Austin, Austin, TX, USA"
+          ]
+        },
+        {
+          "name": "Nikko J. Cleri",
+          "affiliations": [
+            "Department of Astronomy and Astrophysics, The Pennsylvania State University, University Park, PA 16802, USA",
+            "Institute for Computational and Data Sciences, The Pennsylvania State University, University Park, PA 16802, USA",
+            "Institute for Gravitation and the Cosmos, The Pennsylvania State University, University Park, PA 16802, USA"
+          ]
+        },
+        {
+          "name": "Dan Coe",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+            "Center for Astrophysical Sciences, Department of Physics and Astronomy, The Johns Hopkins University, 3400 N Charles St. Baltimore, MD 21218, USA",
+            "Association of Universities for Research in Astronomy (AURA), Inc. for the European Space Agency (ESA)"
+          ]
+        },
+        {
+          "name": "Luca Costantin",
+          "affiliations": [
+            "Centro de Astrobiología (CAB), CSIC-INTA, Ctra. de Ajalvir km 4, Torrejón de Ardoz, E-28850, Madrid, Spain"
+          ]
+        },
+        {
+          "name": "Mark Dickinson",
+          "affiliations": [
+            "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 N. Cherry Ave., yTucson, AZ 85719, USA"
+          ]
+        },
+        {
+          "name": "Callum T. Donnan",
+          "affiliations": [
+            "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 N. Cherry Ave., Tucson, AZ 85719, USA"
+          ]
+        },
+        {
+          "name": "Henry C. Ferguson",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA"
+          ]
+        },
+        {
+          "name": "Ananya Ganapathy",
+          "affiliations": [
+            "Center for Astrophysical Sciences, Department of Physics and Astronomy, The Johns Hopkins University, 3400 N Charles St. Baltimore, MD 21218, USA"
+          ]
+        },
+        {
+          "name": "Giovanni Gandolfi",
+          "affiliations": [
+            "INAF – Osservatorio Astronomico di Roma, via Frascati 33, 00078, Monteporzio Catone, Italy"
+          ]
+        },
+        {
+          "name": "Mauro Giavalisco",
+          "affiliations": [
+            "University of Massachusetts Amherst, 710 North Pleasant Street, Amherst, MA 01003-9305, USA"
+          ]
+        },
+        {
+          "name": "Norman A. Grogin",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA"
+          ]
+        },
+        {
+          "name": "Pablo Arrabal Haro",
+          "affiliations": [
+            "Center for Space Sciences and Technology, UMBC, 5523 Research Park Dr, Baltimore, MD 21228 USA",
+            "Astrophysics Science Division, NASA Goddard Space Flight Center, 8800 Greenbelt Rd, Greenbelt, MD 20771, USA"
+          ]
+        },
+        {
+          "name": "Michaela Hirschmann",
+          "affiliations": [
+            "Institute of Physics, Lab for galaxy evolution and spectral modelling, EPFL, Observatory of Sauverny, Chemin Pegasi 51, 1290 Versoix, Switzerland"
+          ]
+        },
+        {
+          "name": "Weida Hu",
+          "affiliations": [
+            "Key Laboratory for Research in Galaxies and Cosmology, Shanghai Astronomical Observatory, Chinese Academy of Sciences, 80 Nandan Road, Shanghai 200030, China"
+          ]
+        },
+        {
+          "name": "Taylor A. Hutchison",
+          "affiliations": [
+            "Astrophysics Science Division, Code 660, NASA Goddard Space Flight Center, 8800 Greenbelt Rd., Greenbelt, MD 20771, USA",
+            "Department of Astronomy, University of Maryland, Baltimore County, MD 21250, USA",
+            "Center for Research and Exploration in Space Science and Technology, NASA/GSFC, Greenbelt, MD 20771 USA"
+          ],
+          "notes": [
+            "NASA Postdoctoral Fellow"
+          ]
+        },
+        {
+          "name": "Intae Jung",
+          "affiliations": [
+            "Department of Astronomy and Space Science, Chungbuk National University, Cheongju, 28644, Republic of Korea"
+          ]
+        },
+        {
+          "name": "Jeyhan S. Kartaltepe",
+          "affiliations": [
+            "Laboratory for Multiwavelength Astrophysics, School of Physics and Astronomy, Rochester Institute of Technology, 84 Lomb Memorial Drive, Rochester, NY 14623, USA"
+          ]
+        },
+        {
+          "name": "Anton M. Koekemoer",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA"
+          ]
+        },
+        {
+          "name": "Gene C. K. Leung",
+          "affiliations": [
+            "MIT Kavli Institute for Astrophysics and Space Research, 77 Massachusetts Ave., Cambridge, MA 02139, USA"
+          ]
+        },
+        {
+          "name": "Mario Llerena",
+          "affiliations": [
+            "INAF Osservatorio Astronomico di Roma, Via Frascati 33, 00078 Monte Porzio Catone, Rome, Italy"
+          ]
+        },
+        {
+          "name": "Ray A. Lucas",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA"
+          ]
+        },
+        {
+          "name": "Jessica A. Mitlehner",
+          "affiliations": [
+            "Department of Physics and Astronomy, University of Iowa, Iowa City, IA, USA"
+          ]
+        },
+        {
+          "name": "Casey Papovich",
+          "affiliations": [
+            "Department of Physics and Astronomy, Texas A&M University, College Station, TX, 77843-4242 USA",
+            "George P. and Cynthia Woods Mitchell Institute for Fundamental Physics and Astronomy, Texas A&M University, College Station, TX, 77843-4242 USA"
+          ]
+        },
+        {
+          "name": "Pablo G. Pérez-González",
+          "affiliations": [
+            "Centro de Astrobiología (CAB), CSIC-INTA, Ctra. de Ajalvir km 4, Torrejón de Ardoz, E-28850, Madrid, Spain"
+          ]
+        },
+        {
+          "name": "Giulia Rodighiero",
+          "affiliations": [
+            "Dipartimento di Fisica e Astronomia, Università degli Studi di Padova, Vicolo dell'Osservatorio 3, I-35122 Padova, Italy"
+          ]
+        },
+        {
+          "name": "Lu Shen",
+          "affiliations": [
+            "Center for Astronomy and Astrophysics and Department of Physics, Fudan University, Shanghai 200438, People’s Republic of China"
+          ]
+        },
+        {
+          "name": "Raymond C. Simons",
+          "affiliations": [
+            "Department of Engineering and Physics, Providence College, 1 Cunningham Sq, Providence, RI 02918 USA"
+          ]
+        },
+        {
+          "name": "Jonathan R. Trump",
+          "affiliations": [
+            "Department of Physics, 196A Auditorium Road, Unit 3046, University of Connecticut, Storrs, CT 06269, USA"
+          ]
+        },
+        {
+          "name": "Brittany N. Vanderhoof",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA"
+          ]
+        },
+        {
+          "name": "L. Y. Aaron Yung",
+          "affiliations": [
+            "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+            "Institute of Astronomy and Department of Physics, National Tsing Hua University, Hsinchu 30013, Taiwan"
+          ],
+          "notes": [
+            "Giacconi Postdoctoral Fellow"
+          ]
+        },
+        {
+          "name": "Jorge A. Zavala",
+          "affiliations": [
+            "University of Massachusetts Amherst, 710 North Pleasant Street, Amherst, MA 01003-9305, USA"
+          ]
         }
       ]
     }
