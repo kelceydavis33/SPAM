@@ -317,14 +317,7 @@ async function renderCatalogs() {
   host.innerHTML = html;
 }
 
-/* Team, rendered as a paper-style author block */
-
-// Footnote symbols for \\altaffiliation, so institution numbers stay clean.
-const NOTE_MARKS = ["*", "\u2020", "\u2021", "\u00A7", "\u00B6"];
-
-function noteMark(index) {
-  return NOTE_MARKS[(index - 1) % NOTE_MARKS.length];
-}
+/* Team: one row per person, affiliations alongside the name. */
 
 async function renderTeam() {
   const host = document.getElementById("team-list");
@@ -346,37 +339,34 @@ async function renderTeam() {
   for (const group of data.groups) {
     html += `<section class="team-group">`;
     html += `<h2 class="team-group__name">${escapeHtml(group.group)}</h2>`;
-    html += `<p class="authors">`;
+    html += `<div class="roster">`;
 
-    const names = group.authors.map(author => {
-      const marks = (author.affils || []).join(",");
-      const notes = (author.notes || []).map(noteMark).join("");
-      let piece = `<span class="author">${escapeHtml(author.name)}`;
-      if (marks || notes) {
-        piece += `<sup>${escapeHtml(marks)}${notes ? " " + escapeHtml(notes) : ""}</sup>`;
+    for (const member of group.members) {
+      html += `<div class="person">`;
+
+      html += `<div class="person__who">`;
+      html += `<span class="person__name">${escapeHtml(member.name)}</span>`;
+      if (member.role) html += `<span class="person__role">${escapeHtml(member.role)}</span>`;
+      html += `</div>`;
+
+      html += `<div class="person__where">`;
+      const affiliations = member.affiliations || [];
+      if (affiliations.length) {
+        for (const affiliation of affiliations) {
+          html += `<p class="person__affil">${escapeHtml(affiliation)}</p>`;
+        }
+      } else {
+        html += `<p class="person__affil person__affil--missing">Affiliation not listed</p>`;
       }
-      return piece + `</span>`;
-    });
+      for (const note of member.notes || []) {
+        html += `<p class="person__note">${escapeHtml(note)}</p>`;
+      }
+      html += `</div>`;
 
-    html += names.join(", ");
-    html += `</p></section>`;
-  }
-
-  if (data.affiliations && data.affiliations.length) {
-    html += `<ol class="affiliations">`;
-    for (const affiliation of data.affiliations) {
-      html += `<li>${escapeHtml(affiliation)}</li>`;
+      html += `</div>`;
     }
-    html += `</ol>`;
-  }
 
-  if (data.notes && data.notes.length) {
-    html += `<ul class="affil-notes">`;
-    data.notes.forEach((note, index) => {
-      html += `<li><span class="affil-notes__mark">${escapeHtml(noteMark(index + 1))}</span>`;
-      html += `${escapeHtml(note)}</li>`;
-    });
-    html += `</ul>`;
+    html += `</div></section>`;
   }
 
   host.innerHTML = html;
