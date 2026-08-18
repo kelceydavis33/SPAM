@@ -30,10 +30,8 @@ EXPORT_URL = "https://docs.google.com/document/d/" + DOC_ID + "/export?format=tx
 PIS = ["Kelcey", "Rebecca"]
 ARCHITECTS = ["Hollis", "Steve"]
 
-# Emails are required in the doc so the paper can be assembled, but publishing
-# them on a public page hands them straight to scrapers. Flip to True only if
-# the team agrees.
-SHOW_EMAILS = False
+# Emails and ORCIDs are parsed out of the doc but deliberately not published:
+# the page shows names and affiliations only, as an author block would.
 
 
 def read_braced(text, open_index):
@@ -134,19 +132,35 @@ def matches(author, patterns):
     return any(pattern.lower() in lowered for pattern in patterns)
 
 
-def to_member(author, role):
-    member = {
-        "name": author["name"],
-        "role": role,
-        "institution": "; ".join(author["affiliations"]),
-        "orcid": author["orcid"],
-        "website": "",
-    }
-    if author["altaffiliation"]:
-        member["note"] = "; ".join(author["altaffiliation"])
-    if SHOW_EMAILS and author["emails"]:
-        member["email"] = author["emails"][0]
-    return member
+def build_author_block(ordered):
+    """Number affiliations in order of first appearance, the way LaTeX does.
+
+    Returns the shared affiliation and note lists plus, for each author, the
+    marker indices pointing into them.
+    """
+    affiliations = []
+    notes = []
+    entries = []
+
+    for author in ordered:
+        affil_indices = []
+        for affiliation in author["affiliations"]:
+            if affiliation not in affiliations:
+                affiliations.append(affiliation)
+            affil_indices.append(affiliations.index(affiliation) + 1)
+
+        note_indices = []
+        for note in author["altaffiliation"]:
+            if note not in notes:
+                notes.append(note)
+            note_indices.append(notes.index(note) + 1)
+
+        entry = {"name": author["name"], "affils": affil_indices}
+        if note_indices:
+            entry["notes"] = note_indices
+        entries.append(entry)
+
+    return entries, affiliations, notes
 
 
 def main():
@@ -176,33 +190,39 @@ def main():
         key=lambda a: (surname(a["name"]), a["name"]),
     )
 
-    for author in authors:
-        if author not in named and author not in others:
-            print("  warning: dropped", author["name"])
+    # One pass over everyone in display order, so affiliation numbers run
+    # top to bottom across the whole page as they would in a paper.
+    ordered = pis + architects + others
+    entries, affiliations, notes = build_author_block(ordered)
+
+    by_name = {}
+    for entry in entries:
+        by_name[entry["name"]] = entry
 
     groups = []
-    if pis:
-        groups.append({
-            "group": "Principal investigators",
-            "members": [to_member(a, "PI") for a in pis],
-        })
-    if architects:
-        groups.append({
-            "group": "Architects",
-            "members": [to_member(a, "Architect") for a in architects],
-        })
-    if others:
-        groups.append({
-            "group": "Team",
-            "members": [to_member(a, "") for a in others],
-        })
+    for label, people in (
+        ("Principal investigators", pis),
+        ("Architects", architects),
+        ("Team", others),
+    ):
+        if people:
+            groups.append({
+                "group": label,
+                "authors": [by_name[a["name"]] for a in people],
+            })
+
+    output = {
+        "groups": groups,
+        "affiliations": affiliations,
+        "notes": notes,
+    }
 
     with open("data/team.json", "w") as handle:
-        json.dump(groups, handle, indent=2)
+        json.dump(output, handle, indent=2)
 
-    print("Wrote", sum(len(g["members"]) for g in groups), "people to data/team.json")
+    print("Wrote", len(ordered), "people and", len(affiliations), "affiliations")
     for group in groups:
-        print(" ", group["group"] + ":", ", ".join(m["name"] for m in group["members"]))
+        print(" ", group["group"] + ":", ", ".join(a["name"] for a in group["authors"]))
 
 
 if __name__ == "__main__":
