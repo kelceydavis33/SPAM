@@ -1,37 +1,324 @@
 [
   {
-    "group": "Principal investigator",
+    "group": "Principal investigators",
     "members": [
+      {
+        "name": "Rebecca L. Larson",
+        "role": "PI",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+        "orcid": "0000-0003-2366-8858",
+        "website": "",
+        "note": "Giacconi Postdoctoral Fellow"
+      },
       {
         "name": "Kelcey Davis",
         "role": "PI",
-        "institution": "University of Connecticut",
-        "website": "https://github.com/kelceydavis33",
-        "orcid": ""
+        "institution": "Department of Physics, 196A Auditorium Road, Unit 3046, University of Connecticut, Storrs, CT 06269, USA",
+        "orcid": "0000-0001-8047-8351",
+        "website": "",
+        "note": "NSF Graduate Research Fellow"
       }
     ]
   },
   {
-    "group": "Co-investigators",
+    "group": "Architects",
     "members": [
       {
-        "name": "Add a name",
-        "role": "Co-I",
-        "institution": "Institution",
+        "name": "Steven L. Finkelstein",
+        "role": "Architect",
+        "institution": "Department of Astronomy, The University of Texas at Austin, Austin, TX, USA; Cosmic Frontier Center, The University of Texas at Austin, Austin, TX, USA",
+        "orcid": "0000-0001-8519-1130",
+        "website": ""
+      },
+      {
+        "name": "Hollis B. Akins",
+        "role": "Architect",
+        "institution": "Department of Astronomy, The University of Texas at Austin, 2515 Speedway Blvd Stop C1400, Austin, TX 78712, USA; Cosmic Frontier Center, The University of Texas at Austin, Austin, TX 78712, USA; Department of Astrophysical Sciences, Princeton University, 4 Ivy Lane, Princeton, NJ 08544, USA",
+        "orcid": "0000-0003-3596-8794",
         "website": "",
-        "orcid": "0000-0000-0000-0000"
+        "note": "NSF Graduate Research Fellow; NASA Einstein Fellow"
       }
     ]
   },
   {
-    "group": "Students and postdocs",
+    "group": "Team",
     "members": [
       {
-        "name": "Add a name",
-        "role": "Graduate student",
-        "institution": "Institution",
+        "name": "Bren E. Backhaus",
+        "role": "",
+        "institution": "",
+        "orcid": "0000-0001-8534-7502",
+        "website": ""
+      },
+      {
+        "name": "Micaela B. Bagley",
+        "role": "",
+        "institution": "Southeastern Universities Research Association, Washington, DC 20005, USA; Astrophysics Science Division, NASA Goddard Space Flight Center, Greenbelt, MD 20771, USA; Department of Astronomy, The University of Texas at Austin, Austin, TX, USA",
+        "orcid": "0000-0002-9921-9218",
+        "website": ""
+      },
+      {
+        "name": "Guillermo Barro",
+        "role": "",
+        "institution": "University of the Pacific, Stockton, CA 90340 USA",
+        "orcid": "0000-0001-6813-875X",
+        "website": ""
+      },
+      {
+        "name": "Laura Bisigello",
+        "role": "",
+        "institution": "INAF-Osservatorio Astronomico di Padova, Via dell'Osservatorio 5, 35122 Padova, Italy",
+        "orcid": "0000-0003-0492-4924",
+        "website": ""
+      },
+      {
+        "name": "Madisyn Brooks",
+        "role": "",
+        "institution": "",
+        "orcid": "0000-0001-5384-3616",
         "website": "",
-        "orcid": ""
+        "note": "NSF Graduate Research Fellow"
+      },
+      {
+        "name": "Jaclyn B. Champagne",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+        "orcid": "0000-0002-6184-9097",
+        "website": ""
+      },
+      {
+        "name": "Yingjie Cheng",
+        "role": "",
+        "institution": "Department of Astronomy, University of Washington, Seattle, WA 98195, USA",
+        "orcid": "0000-0001-8551-071X",
+        "website": ""
+      },
+      {
+        "name": "Katherine Chworowsky",
+        "role": "",
+        "institution": "Department of Astronomy, The University of Texas at Austin, Austin, TX 78712 USA; Cosmic Frontier Center, The University of Texas at Austin, Austin, TX, USA",
+        "orcid": "0000-0003-4922-0613",
+        "website": ""
+      },
+      {
+        "name": "Nikko J. Cleri",
+        "role": "",
+        "institution": "Department of Astronomy and Astrophysics, The Pennsylvania State University, University Park, PA 16802, USA; Institute for Computational and Data Sciences, The Pennsylvania State University, University Park, PA 16802, USA; Institute for Gravitation and the Cosmos, The Pennsylvania State University, University Park, PA 16802, USA",
+        "orcid": "0000-0001-7151-009X",
+        "website": ""
+      },
+      {
+        "name": "Dan Coe",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA; Center for Astrophysical Sciences, Department of Physics and Astronomy, The Johns Hopkins University, 3400 N Charles St. Baltimore, MD 21218, USA; Association of Universities for Research in Astronomy (AURA), Inc.~for the European Space Agency (ESA)",
+        "orcid": "0000-0001-7410-7669",
+        "website": ""
+      },
+      {
+        "name": "Luca Costantin",
+        "role": "",
+        "institution": "Centro de Astrobiolog\\'{\\i}a (CAB), CSIC-INTA, Ctra. de Ajalvir km 4, Torrej\\'on de Ardoz, E-28850, Madrid, Spain",
+        "orcid": "0000-0001-6820-0015",
+        "website": ""
+      },
+      {
+        "name": "Mark Dickinson",
+        "role": "",
+        "institution": "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 N. Cherry Ave., yTucson, AZ 85719, USA",
+        "orcid": "0000-0001-5414-5131",
+        "website": ""
+      },
+      {
+        "name": "Callum T. Donnan",
+        "role": "",
+        "institution": "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 N. Cherry Ave., Tucson, AZ 85719, USA",
+        "orcid": "0000-0002-7622-0208",
+        "website": ""
+      },
+      {
+        "name": "Henry C. Ferguson",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+        "orcid": "0000-0001-7113-2738",
+        "website": ""
+      },
+      {
+        "name": "Ananya Ganapathy",
+        "role": "",
+        "institution": "Center for Astrophysical Sciences, Department of Physics and Astronomy, The Johns Hopkins University, 3400 N Charles St. Baltimore, MD 21218, USA",
+        "orcid": "orcid=0009-0006-1252-206X",
+        "website": ""
+      },
+      {
+        "name": "Giovanni Gandolfi",
+        "role": "",
+        "institution": "INAF \u2013 Osservatorio Astronomico di Roma, via Frascati 33, 00078, Monteporzio Catone, Italy",
+        "orcid": "0000-0003-3248-5666",
+        "website": ""
+      },
+      {
+        "name": "Mauro Giavalisco",
+        "role": "",
+        "institution": "University of Massachusetts Amherst, 710 North Pleasant Street, Amherst, MA 01003-9305, USA",
+        "orcid": "0000-0002-7831-8751",
+        "website": ""
+      },
+      {
+        "name": "Norman A. Grogin",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+        "orcid": "0000-0001-9440-8872",
+        "website": ""
+      },
+      {
+        "name": "Pablo Arrabal Haro",
+        "role": "",
+        "institution": "Center for Space Sciences and Technology, UMBC, 5523 Research Park Dr, Baltimore, MD 21228 USA; Astrophysics Science Division, NASA Goddard Space Flight Center, 8800 Greenbelt Rd, Greenbelt, MD 20771, USA",
+        "orcid": "0000-0002-7959-8783",
+        "website": ""
+      },
+      {
+        "name": "Michaela Hirschmann",
+        "role": "",
+        "institution": "Institute of Physics, Lab for galaxy evolution and spectral modelling, EPFL, Observatory of Sauverny, Chemin Pegasi 51, 1290 Versoix, Switzerland",
+        "orcid": "0000-0002-3301-3321",
+        "website": ""
+      },
+      {
+        "name": "Weida Hu",
+        "role": "",
+        "institution": "Key Laboratory for Research in Galaxies and Cosmology, Shanghai Astronomical Observatory, Chinese Academy of Sciences, 80 Nandan Road, Shanghai 200030, China",
+        "orcid": "0000-0003-3424-3230",
+        "website": ""
+      },
+      {
+        "name": "Taylor A. Hutchison",
+        "role": "",
+        "institution": "Astrophysics Science Division, Code 660, NASA Goddard Space Flight Center, 8800 Greenbelt Rd., Greenbelt, MD 20771, USA; Department of Astronomy, University of Maryland, Baltimore County, MD 21250, USA; Center for Research and Exploration in Space Science and Technology, NASA/GSFC, Greenbelt, MD 20771 USA",
+        "orcid": "0000-0001-6251-4988",
+        "website": "",
+        "note": "NASA Postdoctoral Fellow"
+      },
+      {
+        "name": "Intae Jung",
+        "role": "",
+        "institution": "Department of Astronomy and Space Science, Chungbuk National University, Cheongju, 28644, Republic of Korea",
+        "orcid": "0000-0003-1187-4240",
+        "website": ""
+      },
+      {
+        "name": "Jeyhan S. Kartaltepe",
+        "role": "",
+        "institution": "Laboratory for Multiwavelength Astrophysics, School of Physics and Astronomy, Rochester Institute of Technology, 84 Lomb Memorial Drive, Rochester, NY 14623, USA",
+        "orcid": "0000-0001-9187-3605",
+        "website": ""
+      },
+      {
+        "name": "Anton M. Koekemoer",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+        "orcid": "0000-0002-6610-2048",
+        "website": ""
+      },
+      {
+        "name": "Gene C. K. Leung",
+        "role": "",
+        "institution": "MIT Kavli Institute for Astrophysics and Space Research, 77 Massachusetts Ave., Cambridge, MA 02139, USA",
+        "orcid": "0000-0002-9393-6507",
+        "website": ""
+      },
+      {
+        "name": "Mario Llerena",
+        "role": "",
+        "institution": "INAF Osservatorio Astronomico di Roma, Via Frascati 33, 00078 Monte Porzio Catone, Rome, Italy",
+        "orcid": "0000-0003-1354-4296",
+        "website": ""
+      },
+      {
+        "name": "Ray A. Lucas",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+        "orcid": "0000-0003-1581-7825",
+        "website": ""
+      },
+      {
+        "name": "Jessica A. Mitlehner",
+        "role": "",
+        "institution": "Department of Physics and Astronomy, University of Iowa, Iowa City, IA, USA",
+        "orcid": "0009-0006-9587-9311",
+        "website": ""
+      },
+      {
+        "name": "Pablo G. P\\'erez-Gonz\\'alez",
+        "role": "",
+        "institution": "Centro de Astrobiolog\\'{\\i}a (CAB), CSIC-INTA, Ctra. de Ajalvir km 4, Torrej\\'on de Ardoz, E-28850, Madrid, Spain",
+        "orcid": "0000-0003-4528-5639",
+        "website": ""
+      },
+      {
+        "name": "Casey Papovich",
+        "role": "",
+        "institution": "Department of Physics and Astronomy, Texas A\\&M University, College Station, TX, 77843-4242 USA; George P.\\ and Cynthia Woods Mitchell Institute for Fundamental Physics and Astronomy, Texas A\\&M University, College Station, TX, 77843-4242 USA",
+        "orcid": "0000-0001-7503-8482",
+        "website": ""
+      },
+      {
+        "name": "Giulia Rodighiero",
+        "role": "",
+        "institution": "Dipartimento di Fisica e Astronomia, Universit\u00e0 degli Studi di Padova, Vicolo dell'Osservatorio 3, I-35122 Padova, Italy",
+        "orcid": "0000-0002-9415-2296",
+        "website": ""
+      },
+      {
+        "name": "Lu Shen",
+        "role": "",
+        "institution": "Center for Astronomy and Astrophysics and Department of Physics, Fudan University, Shanghai 200438, People\u2019s Republic of China",
+        "orcid": "0000-0001-9495-7759",
+        "website": ""
+      },
+      {
+        "name": "Raymond C.\\ Simons",
+        "role": "",
+        "institution": "Department of Engineering and Physics, Providence College, 1 Cunningham Sq, Providence, RI 02918 USA",
+        "orcid": "0000-0002-6386-7299",
+        "website": ""
+      },
+      {
+        "name": "Jonathan R. Trump",
+        "role": "",
+        "institution": "",
+        "orcid": "0000-0002-1410-0470",
+        "website": ""
+      },
+      {
+        "name": "Brittany N. Vanderhoof",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+        "orcid": "0000-0002-8163-0172",
+        "website": ""
+      },
+      {
+        "name": "Jorge A. Zavala",
+        "role": "",
+        "institution": "University of Massachusetts Amherst, 710 North Pleasant Street, Amherst, MA 01003-9305, USA",
+        "orcid": "0000-0002-7051-1100",
+        "website": ""
+      },
+      {
+        "name": "{Jacqueline} {Antwi-Danso}",
+        "role": "",
+        "institution": "University of Toronto, 50 St George St,Toronto, ON, M5S 3H4, Canada",
+        "orcid": "0000-0002-0243-6575",
+        "website": "",
+        "note": "Dunlap Postdoctoral Fellow"
+      },
+      {
+        "name": "{L. Y. Aaron} {Yung}",
+        "role": "",
+        "institution": "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA; Institute of Astronomy and Department of Physics, National Tsing Hua University, Hsinchu 30013, Taiwan",
+        "orcid": "0000-0003-3466-035X",
+        "website": "",
+        "note": "Giacconi Postdoctoral Fellow"
       }
     ]
   }
