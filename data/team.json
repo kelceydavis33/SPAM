@@ -1,0 +1,38 @@
+[
+  {
+    "group": "Principal investigator",
+    "members": [
+      {
+        "name": "Kelcey Davis",
+        "role": "PI",
+        "institution": "University of Connecticut",
+        "website": "https://github.com/kelceydavis33",
+        "orcid": ""
+      }
+    ]
+  },
+  {
+    "group": "Co-investigators",
+    "members": [
+      {
+        "name": "Add a name",
+        "role": "Co-I",
+        "institution": "Institution",
+        "website": "",
+        "orcid": "0000-0000-0000-0000"
+      }
+    ]
+  },
+  {
+    "group": "Students and postdocs",
+    "members": [
+      {
+        "name": "Add a name",
+        "role": "Graduate student",
+        "institution": "Institution",
+        "website": "",
+        "orcid": ""
+      }
+    ]
+  }
+]
