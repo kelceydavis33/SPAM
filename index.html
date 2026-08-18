@@ -34,14 +34,25 @@
   <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
 
     <div class="hero">
-      <p class="eyebrow">Cycle 4 · NIRCam imaging · 62.9 hours · non-proprietary</p>
-      <h1 class="hero__title">Ten new filters<br>over CEERS.</h1>
-      <p class="hero__lede">
-        SPAM adds nine medium bands and one wide band to the CEERS Early-Release Science
-        field, bracketing the Balmer break and tracing [O&nbsp;III] emission out to the
-        earliest known reionized bubbles.
-      </p>
+      <div class="hero__text">
+        <p class="eyebrow">JWST Cycle 4 · GO Proposal 8559</p>
+        <h1 class="hero__title">SPAM</h1>
+        <p class="hero__expansion">
+          Star-formation from Photometry through the Addition of Medium-bands
+        </p>
+      </div>
+
+      <figure class="hero__logo">
+        <img src="assets/spam-logo.png"
+             onerror="this.onerror=null; this.src='https://github.com/user-attachments/assets/418f0c6d-fd9b-4add-87b5-98308d1a1bb0';"
+             alt="The SPAM logo, a canned-meat tin rendered in the style of a survey badge">
+      </figure>
     </div>
+
+    <p class="announce">
+      Host for the SPAM Photometric Catalog from awarded JWST Cycle 4 GO Proposal 8559.
+      <strong>Coming 2025/2026.</strong>
+    </p>
 
     <figure class="coverage">
       <figcaption class="coverage__caption">
@@ -54,33 +65,27 @@
     <div class="prose">
       <h2>Abstract</h2>
       <p>
-        SPAM (Star-formation from Photometry through the Addition of Medium-bands) is a NIRCam
-        imaging program adding ten filters — F070W, F140M, F162M, F182M, F210M, F300M, F335M,
-        F360M, F430M and F480M — to the CEERS Early-Release Science legacy dataset (ERS&nbsp;#1345).
-      </p>
-      <p>The program is built around three goals:</p>
-      <ol>
-        <li>
-          Measure the extent and occupation of two overdensities that may power the earliest-known
-          reionized bubbles at <em>z</em>&nbsp;=&nbsp;7.7 and 8.7, by tracing strong [O&nbsp;III] emission
-          and improving photometric-redshift precision by 5–10× over CEERS alone.
-        </li>
-        <li>
-          Break photometric redshift degeneracies and reliably map galaxy evolution at <em>z</em>&nbsp;&gt;&nbsp;2.
-        </li>
-        <li>
-          Constrain star-formation histories of massive galaxies at <em>z</em>&nbsp;&gt;&nbsp;4 using five
-          short-wavelength medium bands bracketing the Balmer break.
-        </li>
-      </ol>
-      <p>
-        All 62.9 hours are non-proprietary and add directly to the public CEERS legacy data.
+        We propose SPAM (Star-formation from Photometry through the Addition of
+        Medium-bands), a NIRCam imaging program to add ten new filters &mdash; nine medium
+        band (MB) filters and one wide band (WB) filter (F070W, F140M, F162M, F182M, F210M,
+        F300M, F335M, F360M, F430M, and F480M) &mdash; to the CEERS Early-Release Science
+        (ERS&nbsp;#1345) legacy dataset. SPAM is an efficient medium program which will have
+        a large impact as it can simultaneously 1) measure the extent and occupation of two
+        overdensities that may be powering the earliest-known reionized bubbles at
+        <em>z</em>&nbsp;=&nbsp;7.7 and 8.7 by tracing strong [OIII] emission improving the
+        photometric-redshift precision by 5-10X over CEERS alone, 2) provide necessary
+        filters to break photometric redshift degeneracies and reliably map galaxy
+        evolution at <em>z</em>&nbsp;&gt;&nbsp;2, and 3) constrain star-formation histories
+        of massive galaxies at <em>z</em>&nbsp;&gt;&nbsp;4 by observing five
+        short-wavelength MBs bracketing the Balmer break. Here, we propose 62.9 hours of
+        non-proprietary NIRCam imaging adding to the public CEERS legacy data and enabling
+        an even broader range of science for the entire community.
       </p>
       <p class="prose__links">
-        <a href="https://www.stsci.edu/jwst-program-info/download/jwst/pdf/8559/">Approved proposal (PDF)</a>
+        <a href="https://www.stsci.edu/jwst-program-info/download/jwst/pdf/8559/">Public PDF</a>
         <a href="https://github.com/kelceydavis33/SPAM">Repository</a>
       </p>
-    </div>
+      <p class="credit">Logo by Julie Wakefield, UConn Design Center</p>
   </section>
 
   <!-- ── Catalogs ─────────────────────────────────────────────── -->
@@ -114,7 +119,7 @@
   <section class="panel" id="panel-arxiv" role="tabpanel" aria-labelledby="tab-arxiv" hidden>
     <h1 class="panel__title">arXiv feed</h1>
     <p class="panel__lede">
-      Preprints whose abstracts mention SPAM alongside JWST, NIRCam or CEERS.
+      Papers that name SPAM, or the program number, in their abstract or full text.
       Collected automatically each week — this list is unfiltered, so treat it as a
       starting point rather than a verified bibliography.
     </p>
@@ -125,7 +130,7 @@
 </main>
 
 <footer class="colophon">
-  <p>SPAM — JWST Cycle 4 GO Program 8559. Logo by Julie Wakefield, UConn Design Center.</p>
+  <p>SPAM — JWST Cycle 4 GO Program 8559.</p>
   <p>Filter bandpasses drawn from nominal NIRCam pivot wavelengths and widths.</p>
 </footer>
 
