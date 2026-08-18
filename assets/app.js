@@ -332,12 +332,18 @@ async function renderTeam() {
     for (const member of group.members) {
       html += `<article class="card">`;
       html += `<p class="member__name">${escapeHtml(member.name)}</p>`;
-      html += `<p class="member__role">${escapeHtml(member.role)}</p>`;
-      html += `<p class="member__inst">${escapeHtml(member.institution)}</p>`;
-      html += `<p class="member__links">`;
-      if (member.website) html += `<a href="${escapeHtml(member.website)}">Website</a>`;
-      if (member.orcid)   html += `<a href="https://orcid.org/${escapeHtml(member.orcid)}">ORCID</a>`;
-      html += `</p></article>`;
+      // Everyone outside the PI and architect groups has no role label.
+      if (member.role) html += `<p class="member__role">${escapeHtml(member.role)}</p>`;
+      if (member.institution) html += `<p class="member__inst">${escapeHtml(member.institution)}</p>`;
+      if (member.note) html += `<p class="member__note">${escapeHtml(member.note)}</p>`;
+      if (member.website || member.orcid || member.email) {
+        html += `<p class="member__links">`;
+        if (member.website) html += `<a href="${escapeHtml(member.website)}">Website</a>`;
+        if (member.orcid)   html += `<a href="https://orcid.org/${escapeHtml(member.orcid)}">ORCID</a>`;
+        if (member.email)   html += `<a href="mailto:${escapeHtml(member.email)}">Email</a>`;
+        html += `</p>`;
+      }
+      html += `</article>`;
     }
     html += `</div></section>`;
   }
