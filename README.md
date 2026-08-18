@@ -2,10 +2,6 @@
 
 Host for SPAM Photometric Catalog from awarded JWST Cycle 4 GO Proposal 8559 COMING 2025/2026
 
-If you use our catalog, please cite these papers:
-
-- Survey:
-- Photometry Catalog:
 
 ## Abstract
 
