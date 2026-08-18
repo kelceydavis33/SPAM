@@ -19,6 +19,7 @@ Run by .github/workflows/update-team.yml. Standard library only.
 
 import json
 import re
+import unicodedata
 import urllib.request
 
 DOC_ID = "1hIuAKhXKbIYI1VxKhqHcCJMBsa_sHM6EIk-KvbJOahs"
@@ -27,11 +28,86 @@ EXPORT_URL = "https://docs.google.com/document/d/" + DOC_ID + "/export?format=tx
 # Who goes in which section. Matching is case-insensitive and substring-based,
 # so a first name is enough -- unless two team members share one, in which case
 # use the full name here.
-PIS = ["Kelcey", "Rebecca"]
-ARCHITECTS = ["Hollis", "Steve"]
+PIS = [
+    ("Kelcey", "PI"),
+    ("Rebecca", "Co-PI"),
+]
+ARCHITECTS = [
+    ("Hollis", ""),
+    ("Steve", ""),
+]
 
 # Emails and ORCIDs are parsed out of the doc but deliberately not published:
 # the page shows names and affiliations only, as an author block would.
+
+
+# LaTeX accent commands mapped to Unicode combining marks. Applying the mark
+# after the base letter and normalising with NFC gets the composed character.
+ACCENTS = {
+    "'": "\u0301",  # acute
+    "`": "\u0300",  # grave
+    '"': "\u0308",  # diaeresis
+    "^": "\u0302",  # circumflex
+    "~": "\u0303",  # tilde
+    "=": "\u0304",  # macron
+    ".": "\u0307",  # dot above
+    "u": "\u0306",  # breve
+    "v": "\u030C",  # caron
+    "H": "\u030B",  # double acute
+    "c": "\u0327",  # cedilla
+    "k": "\u0328",  # ogonek
+    "d": "\u0323",  # dot below
+    "b": "\u0331",  # macron below
+    "r": "\u030A",  # ring above
+}
+
+# Standalone letter commands that are not accents over a base letter.
+LIGATURES = {
+    "ss": "\u00DF", "ae": "\u00E6", "AE": "\u00C6", "oe": "\u0153",
+    "OE": "\u0152", "aa": "\u00E5", "AA": "\u00C5", "o": "\u00F8",
+    "O": "\u00D8", "l": "\u0142", "L": "\u0141", "i": "i", "j": "j",
+}
+
+ACCENT_PATTERN = re.compile(
+    r"\\([`'\"^~=.uvHckdbr])\s*(?:\{\s*(?:\\([ij])\b|([A-Za-z]))\s*\}|\\([ij])\b|([A-Za-z]))"
+)
+BRACED_NAME = re.compile(r"^\{(?P<given>[^{}]*)\}\s*\{(?P<family>[^{}]*)\}$")
+
+LIGATURE_PATTERN = re.compile(r"\\(ss|ae|AE|oe|OE|aa|AA|[oOlLij])(?![A-Za-z])[ ]?")
+
+
+def delatex(value):
+    """Turn LaTeX source into readable text.
+
+    The doc holds real AASTeX, so names and affiliations arrive with escapes
+    like \\'e, \\&, ~ and brace groups. Rendering those raw would put
+    backslashes on the page.
+    """
+    if not value:
+        return ""
+
+    def accent(match):
+        mark = ACCENTS[match.group(1)]
+        base = match.group(2) or match.group(3) or match.group(4) or match.group(5) or ""
+        return unicodedata.normalize("NFC", base + mark)
+
+    value = ACCENT_PATTERN.sub(accent, value)
+    value = LIGATURE_PATTERN.sub(lambda m: LIGATURES[m.group(1)], value)
+
+    # Escaped punctuation.
+    for escaped, plain in (("\\&", "&"), ("\\%", "%"), ("\\$", "$"),
+                           ("\\#", "#"), ("\\_", "_"), ("\\{", "{"), ("\\}", "}")):
+        value = value.replace(escaped, plain)
+
+    # Spacing commands and non-breaking spaces.
+    value = re.sub(r"\\[,;:!]", " ", value)
+    value = value.replace("\\ ", " ").replace("~", " ")
+
+    # Anything left that looks like a command, then stray braces.
+    value = re.sub(r"\\[A-Za-z]+[ ]?", "", value)
+    value = value.replace("{", "").replace("}", "")
+
+    return " ".join(value.split())
 
 
 def read_braced(text, open_index):
@@ -94,16 +170,26 @@ def parse_authors(text):
         brace = block.find("{")
         if brace == -1:
             continue
-        name, _ = read_braced(block, brace)
-        name = " ".join(name.split())
+        raw_name, _ = read_braced(block, brace)
+        raw_name = " ".join(raw_name.split())
+        if not raw_name:
+            continue
+
+        # AASTeX lets authors group their surname: \author{{Given} {Family}}.
+        # Read it before delatex strips the braces, so sorting stays correct.
+        grouped = BRACED_NAME.match(raw_name)
+        sort_name = delatex(grouped.group("family")) if grouped else ""
+
+        name = delatex(raw_name)
         if not name:
             continue
 
         record = {
             "name": name,
+            "sort_name": sort_name,
             "orcid": orcid,
-            "affiliations": find_field(block, "affiliation"),
-            "altaffiliation": find_field(block, "altaffiliation"),
+            "affiliations": [delatex(a) for a in find_field(block, "affiliation")],
+            "altaffiliation": [delatex(a) for a in find_field(block, "altaffiliation")],
             "emails": find_field(block, "email"),
         }
 
@@ -116,51 +202,51 @@ def parse_authors(text):
     return authors
 
 
-def surname(name):
-    """Best-effort surname for sorting. Compound names may need a manual fix."""
-    parts = name.replace(",", " ").split()
+def surname(author):
+    """Surname for sorting: the author's own grouping if given, else a guess."""
+    if author.get("sort_name"):
+        return author["sort_name"].lower()
+
+    parts = author["name"].replace(",", " ").split()
     if not parts:
         return ""
     # Skip a trailing suffix so "Jane Doe Jr." sorts under Doe.
     while len(parts) > 1 and parts[-1].rstrip(".").lower() in ("jr", "sr", "ii", "iii", "iv"):
         parts.pop()
-    return parts[-1].lower()
+
+    # Strip accents for sorting so Ö files with O rather than after Z.
+    stripped = unicodedata.normalize("NFD", parts[-1].lower())
+    return "".join(c for c in stripped if not unicodedata.combining(c))
 
 
-def matches(author, patterns):
-    lowered = author["name"].lower()
-    return any(pattern.lower() in lowered for pattern in patterns)
+def in_config_order(authors, entries):
+    """Pick out named people, ordered as listed above rather than as the doc
+    happens to list them, since PI order is meaningful.
 
-
-def build_author_block(ordered):
-    """Number affiliations in order of first appearance, the way LaTeX does.
-
-    Returns the shared affiliation and note lists plus, for each author, the
-    marker indices pointing into them.
+    Returns (author, role) pairs.
     """
-    affiliations = []
-    notes = []
-    entries = []
+    picked = []
+    for pattern, role in entries:
+        for author in authors:
+            already = any(author is chosen for chosen, _ in picked)
+            if pattern.lower() in author["name"].lower() and not already:
+                picked.append((author, role))
+                break
+        else:
+            print("  warning: no author matched", repr(pattern))
+    return picked
 
-    for author in ordered:
-        affil_indices = []
-        for affiliation in author["affiliations"]:
-            if affiliation not in affiliations:
-                affiliations.append(affiliation)
-            affil_indices.append(affiliations.index(affiliation) + 1)
 
-        note_indices = []
-        for note in author["altaffiliation"]:
-            if note not in notes:
-                notes.append(note)
-            note_indices.append(notes.index(note) + 1)
-
-        entry = {"name": author["name"], "affils": affil_indices}
-        if note_indices:
-            entry["notes"] = note_indices
-        entries.append(entry)
-
-    return entries, affiliations, notes
+def to_member(author, role):
+    """One person as the site renders them: name, role, affiliations inline."""
+    member = {"name": author["name"]}
+    if role:
+        member["role"] = role
+    if author["affiliations"]:
+        member["affiliations"] = author["affiliations"]
+    if author["altaffiliation"]:
+        member["notes"] = author["altaffiliation"]
+    return member
 
 
 def main():
@@ -182,47 +268,60 @@ def main():
         # Never overwrite a good team list with an empty one.
         raise SystemExit("No author blocks found; leaving data/team.json alone.")
 
-    pis = [a for a in authors if matches(a, PIS)]
-    architects = [a for a in authors if matches(a, ARCHITECTS) and a not in pis]
-    named = pis + architects
+    pis = in_config_order(authors, PIS)
+    taken = [author for author, _ in pis]
+    architects = [
+        (author, role)
+        for author, role in in_config_order(authors, ARCHITECTS)
+        if author not in taken
+    ]
+    taken += [author for author, _ in architects]
+
     others = sorted(
-        (a for a in authors if a not in named),
-        key=lambda a: (surname(a["name"]), a["name"]),
+        (a for a in authors if a not in taken),
+        key=lambda a: (surname(a), a["name"]),
     )
 
-    # One pass over everyone in display order, so affiliation numbers run
-    # top to bottom across the whole page as they would in a paper.
-    ordered = pis + architects + others
-    entries, affiliations, notes = build_author_block(ordered)
-
-    by_name = {}
-    for entry in entries:
-        by_name[entry["name"]] = entry
-
     groups = []
-    for label, people in (
-        ("Principal investigators", pis),
-        ("Architects", architects),
-        ("Team", others),
-    ):
-        if people:
-            groups.append({
-                "group": label,
-                "authors": [by_name[a["name"]] for a in people],
-            })
+    if pis:
+        groups.append({
+            "group": "Principal investigators",
+            "members": [to_member(a, role) for a, role in pis],
+        })
+    if architects:
+        groups.append({
+            "group": "Architects",
+            "members": [to_member(a, role) for a, role in architects],
+        })
+    if others:
+        groups.append({
+            "group": "Team",
+            "members": [to_member(a, "") for a in others],
+        })
 
-    output = {
-        "groups": groups,
-        "affiliations": affiliations,
-        "notes": notes,
-    }
+    total = sum(len(g["members"]) for g in groups)
+
+    missing = [a["name"] for a in authors if not a["affiliations"]]
+    if missing:
+        print("  warning: no \\affiliation found for:", ", ".join(missing))
+
+    # Flag affiliations that look like the same place typed two ways.
+    prefixes = {}
+    for author in authors:
+        for affiliation in author["affiliations"]:
+            prefixes.setdefault(affiliation[:28].lower(), set()).add(affiliation)
+    for variants in prefixes.values():
+        if len(variants) > 1:
+            print("  note: these start alike, merge in the doc if the same place:")
+            for variant in sorted(variants):
+                print("        -", variant[:90])
 
     with open("data/team.json", "w") as handle:
-        json.dump(output, handle, indent=2)
+        json.dump({"groups": groups}, handle, indent=2, ensure_ascii=False)
 
-    print("Wrote", len(ordered), "people and", len(affiliations), "affiliations")
+    print("Wrote", total, "people to data/team.json")
     for group in groups:
-        print(" ", group["group"] + ":", ", ".join(a["name"] for a in group["authors"]))
+        print(" ", group["group"] + ":", ", ".join(m["name"] for m in group["members"]))
 
 
 if __name__ == "__main__":
