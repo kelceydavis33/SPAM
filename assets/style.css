@@ -257,8 +257,8 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
 .chip:hover { border-color: var(--ink); color: var(--ink); }
 .chip--download { border-color: var(--ink); font-weight: 500; color: var(--ink); }
 
-/* ── Team ───────────────────────────────────────────────────── */
-.team-group { margin-bottom: 2.5rem; }
+/* ── Team: paper-style author block ─────────────────────────── */
+.team-group { margin-bottom: 2rem; }
 .team-group__name {
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -267,17 +267,50 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
   color: var(--ink-3);
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
 }
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: 1rem;
+
+.authors {
+  max-width: 46rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0;
 }
-.member__name { font-weight: 600; margin: 0; }
-.member__role { font-family: var(--mono); font-size: 0.7rem; color: var(--wl-3); margin: 0.1rem 0 0.3rem; }
-.member__inst { font-size: 0.88rem; color: var(--ink-2); margin: 0; }
-.member__links { display: flex; gap: 0.75rem; margin-top: 0.6rem; font-family: var(--mono); font-size: 0.72rem; }
+.author { white-space: nowrap; }
+.authors sup {
+  font-family: var(--mono);
+  font-size: 0.62em;
+  color: var(--wl-3);
+  margin-left: 0.1em;
+}
+
+.affiliations {
+  max-width: 46rem;
+  margin: 2.5rem 0 0;
+  padding-left: 1.6rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.affiliations li { margin-bottom: 0.5rem; padding-left: 0.2rem; }
+.affiliations li::marker { font-family: var(--mono); font-size: 0.8em; color: var(--wl-3); }
+
+.affil-notes {
+  max-width: 46rem;
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  font-size: 0.84rem;
+  color: var(--ink-2);
+}
+.affil-notes li { margin-bottom: 0.35rem; }
+.affil-notes__mark {
+  font-family: var(--mono);
+  color: var(--wl-3);
+  margin-right: 0.5rem;
+}
 
 /* ── Status text ────────────────────────────────────────────── */
 .stamp, .status {
