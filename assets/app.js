@@ -291,7 +291,8 @@ async function renderArxiv() {
 
   if (feed.generated_at) {
     const when = new Date(feed.generated_at);
-    stamp.textContent = "Last checked " + when.toISOString().slice(0, 10);
+    const scope = feed.full_text_search ? "arXiv abstracts + ADS full text" : "arXiv abstracts only";
+    stamp.textContent = "Last checked " + when.toISOString().slice(0, 10) + " \u00B7 " + scope;
   }
 
   if (feed.papers.length === 0) {
@@ -301,12 +302,20 @@ async function renderArxiv() {
 
   let html = "";
   for (const paper of feed.papers) {
+    // ADS hits without an arXiv posting are keyed by bibcode, which should not
+    // be labelled as an arXiv number.
+    const looksLikeArxivId = /^\d{4}\.\d{4,5}$/.test(paper.id);
+    const label = looksLikeArxivId ? "arXiv:" + paper.id : paper.id;
+
     html += `<article class="card">`;
     html += `<div class="card__head">`;
     html += `<h2 class="card__title"><a href="${escapeHtml(paper.url)}">${escapeHtml(paper.title)}</a></h2>`;
-    html += `<span class="card__meta">arXiv:${escapeHtml(paper.id)} · ${escapeHtml(paper.published.slice(0, 10))}</span>`;
+    html += `<span class="card__meta">${escapeHtml(label)} · ${escapeHtml(paper.published.slice(0, 10))}</span>`;
     html += `</div>`;
     html += `<p class="card__authors">${escapeHtml(paper.authors)}</p>`;
+    if (paper.source === "ads") {
+      html += `<p class="card__note">Matched on full text, not the abstract.</p>`;
+    }
     html += `</article>`;
   }
   host.innerHTML = html;
