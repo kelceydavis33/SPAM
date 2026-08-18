@@ -1,0 +1,35 @@
+name: Update team list
+
+on:
+  schedule:
+    # 05:00 UTC daily
+    - cron: "0 5 * * *"
+  workflow_dispatch:      # run by hand after someone adds their author block
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read the team doc
+        run: python scripts/update_team.py
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/team.json
+          if git diff --staged --quiet; then
+            echo "Team list unchanged."
+          else
+            git commit -m "Update team list from Google Doc"
+            git push
+          fi
