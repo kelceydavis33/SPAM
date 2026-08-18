@@ -317,40 +317,68 @@ async function renderCatalogs() {
   host.innerHTML = html;
 }
 
-/* Team */
+/* Team, rendered as a paper-style author block */
+
+// Footnote symbols for \\altaffiliation, so institution numbers stay clean.
+const NOTE_MARKS = ["*", "\u2020", "\u2021", "\u00A7", "\u00B6"];
+
+function noteMark(index) {
+  return NOTE_MARKS[(index - 1) % NOTE_MARKS.length];
+}
+
 async function renderTeam() {
   const host = document.getElementById("team-list");
-  let groups;
+  let data;
   try {
-    groups = await loadJson("data/team.json");
+    data = await loadJson("data/team.json");
   } catch (error) {
     showError(host, "data/team.json");
     return;
   }
 
+  if (!data.groups || data.groups.length === 0) {
+    showEmpty(host, "No team members listed yet.");
+    return;
+  }
+
   let html = "";
-  for (const group of groups) {
+
+  for (const group of data.groups) {
     html += `<section class="team-group">`;
     html += `<h2 class="team-group__name">${escapeHtml(group.group)}</h2>`;
-    html += `<div class="team-grid">`;
-    for (const member of group.members) {
-      html += `<article class="card">`;
-      html += `<p class="member__name">${escapeHtml(member.name)}</p>`;
-      // Everyone outside the PI and architect groups has no role label.
-      if (member.role) html += `<p class="member__role">${escapeHtml(member.role)}</p>`;
-      if (member.institution) html += `<p class="member__inst">${escapeHtml(member.institution)}</p>`;
-      if (member.note) html += `<p class="member__note">${escapeHtml(member.note)}</p>`;
-      if (member.website || member.orcid || member.email) {
-        html += `<p class="member__links">`;
-        if (member.website) html += `<a href="${escapeHtml(member.website)}">Website</a>`;
-        if (member.orcid)   html += `<a href="https://orcid.org/${escapeHtml(member.orcid)}">ORCID</a>`;
-        if (member.email)   html += `<a href="mailto:${escapeHtml(member.email)}">Email</a>`;
-        html += `</p>`;
+    html += `<p class="authors">`;
+
+    const names = group.authors.map(author => {
+      const marks = (author.affils || []).join(",");
+      const notes = (author.notes || []).map(noteMark).join("");
+      let piece = `<span class="author">${escapeHtml(author.name)}`;
+      if (marks || notes) {
+        piece += `<sup>${escapeHtml(marks)}${notes ? " " + escapeHtml(notes) : ""}</sup>`;
       }
-      html += `</article>`;
-    }
-    html += `</div></section>`;
+      return piece + `</span>`;
+    });
+
+    html += names.join(", ");
+    html += `</p></section>`;
   }
+
+  if (data.affiliations && data.affiliations.length) {
+    html += `<ol class="affiliations">`;
+    for (const affiliation of data.affiliations) {
+      html += `<li>${escapeHtml(affiliation)}</li>`;
+    }
+    html += `</ol>`;
+  }
+
+  if (data.notes && data.notes.length) {
+    html += `<ul class="affil-notes">`;
+    data.notes.forEach((note, index) => {
+      html += `<li><span class="affil-notes__mark">${escapeHtml(noteMark(index + 1))}</span>`;
+      html += `${escapeHtml(note)}</li>`;
+    });
+    html += `</ul>`;
+  }
+
   host.innerHTML = html;
 }
 
