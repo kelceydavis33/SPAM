@@ -3,12 +3,357 @@
     {
       "group": "Principal investigators",
       "authors": [
-        { "name": "Kelcey Davis", "affils": [1] }
+        {
+          "name": "Rebecca L. Larson",
+          "affils": [
+            1
+          ],
+          "notes": [
+            1
+          ]
+        },
+        {
+          "name": "Kelcey Davis",
+          "affils": [
+            2
+          ],
+          "notes": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Architects",
+      "authors": [
+        {
+          "name": "Steven L. Finkelstein",
+          "affils": [
+            3,
+            4
+          ]
+        },
+        {
+          "name": "Hollis B. Akins",
+          "affils": [
+            5,
+            6,
+            7
+          ],
+          "notes": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Team",
+      "authors": [
+        {
+          "name": "Bren E. Backhaus",
+          "affils": []
+        },
+        {
+          "name": "Micaela B. Bagley",
+          "affils": [
+            8,
+            9,
+            3
+          ]
+        },
+        {
+          "name": "Guillermo Barro",
+          "affils": [
+            10
+          ]
+        },
+        {
+          "name": "Laura Bisigello",
+          "affils": [
+            11
+          ]
+        },
+        {
+          "name": "Madisyn Brooks",
+          "affils": [],
+          "notes": [
+            2
+          ]
+        },
+        {
+          "name": "Jaclyn B. Champagne",
+          "affils": [
+            1
+          ]
+        },
+        {
+          "name": "Yingjie Cheng",
+          "affils": [
+            12
+          ]
+        },
+        {
+          "name": "Katherine Chworowsky",
+          "affils": [
+            13,
+            4
+          ]
+        },
+        {
+          "name": "Nikko J. Cleri",
+          "affils": [
+            14,
+            15,
+            16
+          ]
+        },
+        {
+          "name": "Dan Coe",
+          "affils": [
+            1,
+            17,
+            18
+          ]
+        },
+        {
+          "name": "Luca Costantin",
+          "affils": [
+            19
+          ]
+        },
+        {
+          "name": "Mark Dickinson",
+          "affils": [
+            20
+          ]
+        },
+        {
+          "name": "Callum T. Donnan",
+          "affils": [
+            21
+          ]
+        },
+        {
+          "name": "Henry C. Ferguson",
+          "affils": [
+            1
+          ]
+        },
+        {
+          "name": "Ananya Ganapathy",
+          "affils": [
+            17
+          ]
+        },
+        {
+          "name": "Giovanni Gandolfi",
+          "affils": [
+            22
+          ]
+        },
+        {
+          "name": "Mauro Giavalisco",
+          "affils": [
+            23
+          ]
+        },
+        {
+          "name": "Norman A. Grogin",
+          "affils": [
+            1
+          ]
+        },
+        {
+          "name": "Pablo Arrabal Haro",
+          "affils": [
+            24,
+            25
+          ]
+        },
+        {
+          "name": "Michaela Hirschmann",
+          "affils": [
+            26
+          ]
+        },
+        {
+          "name": "Weida Hu",
+          "affils": [
+            27
+          ]
+        },
+        {
+          "name": "Taylor A. Hutchison",
+          "affils": [
+            28,
+            29,
+            30
+          ],
+          "notes": [
+            4
+          ]
+        },
+        {
+          "name": "Intae Jung",
+          "affils": [
+            31
+          ]
+        },
+        {
+          "name": "Jeyhan S. Kartaltepe",
+          "affils": [
+            32
+          ]
+        },
+        {
+          "name": "Anton M. Koekemoer",
+          "affils": [
+            1
+          ]
+        },
+        {
+          "name": "Gene C. K. Leung",
+          "affils": [
+            33
+          ]
+        },
+        {
+          "name": "Mario Llerena",
+          "affils": [
+            34
+          ]
+        },
+        {
+          "name": "Ray A. Lucas",
+          "affils": [
+            1
+          ]
+        },
+        {
+          "name": "Jessica A. Mitlehner",
+          "affils": [
+            35
+          ]
+        },
+        {
+          "name": "Pablo G. P\\'erez-Gonz\\'alez",
+          "affils": [
+            19
+          ]
+        },
+        {
+          "name": "Casey Papovich",
+          "affils": [
+            36,
+            37
+          ]
+        },
+        {
+          "name": "Giulia Rodighiero",
+          "affils": [
+            38
+          ]
+        },
+        {
+          "name": "Lu Shen",
+          "affils": [
+            39
+          ]
+        },
+        {
+          "name": "Raymond C.\\ Simons",
+          "affils": [
+            40
+          ]
+        },
+        {
+          "name": "Jonathan R. Trump",
+          "affils": []
+        },
+        {
+          "name": "Brittany N. Vanderhoof",
+          "affils": [
+            1
+          ]
+        },
+        {
+          "name": "Jorge A. Zavala",
+          "affils": [
+            23
+          ]
+        },
+        {
+          "name": "{Jacqueline} {Antwi-Danso}",
+          "affils": [
+            41
+          ],
+          "notes": [
+            5
+          ]
+        },
+        {
+          "name": "{L. Y. Aaron} {Yung}",
+          "affils": [
+            1,
+            42
+          ],
+          "notes": [
+            1
+          ]
+        }
       ]
     }
   ],
   "affiliations": [
-    "University of Connecticut, Storrs, CT 06269, USA"
+    "Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA",
+    "Department of Physics, 196A Auditorium Road, Unit 3046, University of Connecticut, Storrs, CT 06269, USA",
+    "Department of Astronomy, The University of Texas at Austin, Austin, TX, USA",
+    "Cosmic Frontier Center, The University of Texas at Austin, Austin, TX, USA",
+    "Department of Astronomy, The University of Texas at Austin, 2515 Speedway Blvd Stop C1400, Austin, TX 78712, USA",
+    "Cosmic Frontier Center, The University of Texas at Austin, Austin, TX 78712, USA",
+    "Department of Astrophysical Sciences, Princeton University, 4 Ivy Lane, Princeton, NJ 08544, USA",
+    "Southeastern Universities Research Association, Washington, DC 20005, USA",
+    "Astrophysics Science Division, NASA Goddard Space Flight Center, Greenbelt, MD 20771, USA",
+    "University of the Pacific, Stockton, CA 90340 USA",
+    "INAF-Osservatorio Astronomico di Padova, Via dell'Osservatorio 5, 35122 Padova, Italy",
+    "Department of Astronomy, University of Washington, Seattle, WA 98195, USA",
+    "Department of Astronomy, The University of Texas at Austin, Austin, TX 78712 USA",
+    "Department of Astronomy and Astrophysics, The Pennsylvania State University, University Park, PA 16802, USA",
+    "Institute for Computational and Data Sciences, The Pennsylvania State University, University Park, PA 16802, USA",
+    "Institute for Gravitation and the Cosmos, The Pennsylvania State University, University Park, PA 16802, USA",
+    "Center for Astrophysical Sciences, Department of Physics and Astronomy, The Johns Hopkins University, 3400 N Charles St. Baltimore, MD 21218, USA",
+    "Association of Universities for Research in Astronomy (AURA), Inc.~for the European Space Agency (ESA)",
+    "Centro de Astrobiolog\\'{\\i}a (CAB), CSIC-INTA, Ctra. de Ajalvir km 4, Torrej\\'on de Ardoz, E-28850, Madrid, Spain",
+    "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 N. Cherry Ave., yTucson, AZ 85719, USA",
+    "NSF's National Optical-Infrared Astronomy Research Laboratory, 950 N. Cherry Ave., Tucson, AZ 85719, USA",
+    "INAF \u2013 Osservatorio Astronomico di Roma, via Frascati 33, 00078, Monteporzio Catone, Italy",
+    "University of Massachusetts Amherst, 710 North Pleasant Street, Amherst, MA 01003-9305, USA",
+    "Center for Space Sciences and Technology, UMBC, 5523 Research Park Dr, Baltimore, MD 21228 USA",
+    "Astrophysics Science Division, NASA Goddard Space Flight Center, 8800 Greenbelt Rd, Greenbelt, MD 20771, USA",
+    "Institute of Physics, Lab for galaxy evolution and spectral modelling, EPFL, Observatory of Sauverny, Chemin Pegasi 51, 1290 Versoix, Switzerland",
+    "Key Laboratory for Research in Galaxies and Cosmology, Shanghai Astronomical Observatory, Chinese Academy of Sciences, 80 Nandan Road, Shanghai 200030, China",
+    "Astrophysics Science Division, Code 660, NASA Goddard Space Flight Center, 8800 Greenbelt Rd., Greenbelt, MD 20771, USA",
+    "Department of Astronomy, University of Maryland, Baltimore County, MD 21250, USA",
+    "Center for Research and Exploration in Space Science and Technology, NASA/GSFC, Greenbelt, MD 20771 USA",
+    "Department of Astronomy and Space Science, Chungbuk National University, Cheongju, 28644, Republic of Korea",
+    "Laboratory for Multiwavelength Astrophysics, School of Physics and Astronomy, Rochester Institute of Technology, 84 Lomb Memorial Drive, Rochester, NY 14623, USA",
+    "MIT Kavli Institute for Astrophysics and Space Research, 77 Massachusetts Ave., Cambridge, MA 02139, USA",
+    "INAF Osservatorio Astronomico di Roma, Via Frascati 33, 00078 Monte Porzio Catone, Rome, Italy",
+    "Department of Physics and Astronomy, University of Iowa, Iowa City, IA, USA",
+    "Department of Physics and Astronomy, Texas A\\&M University, College Station, TX, 77843-4242 USA",
+    "George P.\\ and Cynthia Woods Mitchell Institute for Fundamental Physics and Astronomy, Texas A\\&M University, College Station, TX, 77843-4242 USA",
+    "Dipartimento di Fisica e Astronomia, Universit\u00e0 degli Studi di Padova, Vicolo dell'Osservatorio 3, I-35122 Padova, Italy",
+    "Center for Astronomy and Astrophysics and Department of Physics, Fudan University, Shanghai 200438, People\u2019s Republic of China",
+    "Department of Engineering and Physics, Providence College, 1 Cunningham Sq, Providence, RI 02918 USA",
+    "University of Toronto, 50 St George St,Toronto, ON, M5S 3H4, Canada",
+    "Institute of Astronomy and Department of Physics, National Tsing Hua University, Hsinchu 30013, Taiwan"
   ],
-  "notes": []
+  "notes": [
+    "Giacconi Postdoctoral Fellow",
+    "NSF Graduate Research Fellow",
+    "NASA Einstein Fellow",
+    "NASA Postdoctoral Fellow",
+    "Dunlap Postdoctoral Fellow"
+  ]
 }
