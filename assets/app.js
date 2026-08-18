@@ -11,10 +11,10 @@
 
 const SPAM_FILTERS = [
   { name: "F070W", pivot: 0.704, bw: 0.128, blue: 0.624, red: 0.781 },
-  { name: "F140M", pivot: 1.404, bw: 0.142, blue: 1.331, red: 1.479 },
-  { name: "F162M", pivot: 1.626, bw: 0.168, blue: 1.542, red: 1.713 },
-  { name: "F182M", pivot: 1.845, bw: 0.238, blue: 1.722, red: 1.968 },
-  { name: "F210M", pivot: 2.093, bw: 0.205, blue: 1.992, red: 2.201 },
+  { name: "F140M", pivot: 1.404, bw: 0.142, blue: 1.331, red: 1.479, shared: true },
+  { name: "F162M", pivot: 1.626, bw: 0.168, blue: 1.542, red: 1.713, shared: true },
+  { name: "F182M", pivot: 1.845, bw: 0.238, blue: 1.722, red: 1.968, shared: true },
+  { name: "F210M", pivot: 2.093, bw: 0.205, blue: 1.992, red: 2.201, shared: true },
   { name: "F300M", pivot: 2.996, bw: 0.318, blue: 2.831, red: 3.157 },
   { name: "F335M", pivot: 3.365, bw: 0.347, blue: 3.177, red: 3.537 },
   { name: "F360M", pivot: 3.621, bw: 0.372, blue: 3.426, red: 3.814 },
@@ -163,8 +163,13 @@ function drawCoverage() {
     const y = baseline - 30 - barHeight;
     const color = bandColor(filter.pivot);
 
-    svg += `<g class="band" tabindex="0" ${dataAttrs(filter, "SPAM")}>`;
-    svg += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="${barHeight}" fill="${color}" rx="1"/>`;
+    const program = filter.shared ? "SPAM + MINERVA" : "SPAM";
+
+    svg += `<g class="band" tabindex="0" ${dataAttrs(filter, program)}>`;
+    svg += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="${barHeight}" fill="${color}" rx="1"`;
+    // Bands both programs observe get the fill and the dashed outline.
+    if (filter.shared) svg += ` stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 3"`;
+    svg += `/>`;
     svg += `<text class="band__label band__label--spam" x="${centre}" y="${y - 8}" text-anchor="start" `;
     svg += `transform="rotate(-90 ${centre} ${y - 8})">${filter.name}</text>`;
     svg += `</g>`;
@@ -218,7 +223,6 @@ function attachTooltip(host) {
       `<dl class="tip__rows">` +
       `<dt>Bandwidth</dt><dd>${data.bw} \u00B5m</dd>` +
       `<dt>Pivot</dt><dd>${data.pivot} \u00B5m</dd>` +
-      `<dt>Half-power</dt><dd>${data.blue}\u2013${data.red} \u00B5m</dd>` +
       `</dl>`;
     tip.hidden = false;
 
