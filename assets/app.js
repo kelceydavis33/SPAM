@@ -1,30 +1,47 @@
 /* SPAM site — tabs, data loading, and the filter coverage plot. */
 
 /* ── Filter definitions ─────────────────────────────────────────
-   Pivot wavelengths and bandwidths in microns, from the nominal
-   NIRCam filter list. Edit these if you want exact values.        */
+   All values from the JWST NIRCam filter tables (JDox), based on
+   commissioning flight data:
+   https://jwst-docs.stsci.edu/jwst-near-infrared-camera/nircam-instrumentation/nircam-filters
+
+   pivot = pivot wavelength, bw = bandwidth, blue/red = half-power
+   wavelengths. All in microns. Bars are drawn between the half-power
+   points; the tooltip reports the bandwidth.                         */
 
 const SPAM_FILTERS = [
-  { name: "F070W", pivot: 0.704, width: 0.128 },
-  { name: "F140M", pivot: 1.404, width: 0.142 },
-  { name: "F162M", pivot: 1.626, width: 0.168 },
-  { name: "F182M", pivot: 1.845, width: 0.238 },
-  { name: "F210M", pivot: 2.093, width: 0.205 },
-  { name: "F300M", pivot: 2.996, width: 0.318 },
-  { name: "F335M", pivot: 3.365, width: 0.347 },
-  { name: "F360M", pivot: 3.621, width: 0.372 },
-  { name: "F430M", pivot: 4.280, width: 0.228 },
-  { name: "F480M", pivot: 4.815, width: 0.303 }
+  { name: "F070W", pivot: 0.704, bw: 0.128, blue: 0.624, red: 0.781 },
+  { name: "F140M", pivot: 1.404, bw: 0.142, blue: 1.331, red: 1.479 },
+  { name: "F162M", pivot: 1.626, bw: 0.168, blue: 1.542, red: 1.713 },
+  { name: "F182M", pivot: 1.845, bw: 0.238, blue: 1.722, red: 1.968 },
+  { name: "F210M", pivot: 2.093, bw: 0.205, blue: 1.992, red: 2.201 },
+  { name: "F300M", pivot: 2.996, bw: 0.318, blue: 2.831, red: 3.157 },
+  { name: "F335M", pivot: 3.365, bw: 0.347, blue: 3.177, red: 3.537 },
+  { name: "F360M", pivot: 3.621, bw: 0.372, blue: 3.426, red: 3.814 },
+  { name: "F430M", pivot: 4.280, bw: 0.228, blue: 4.167, red: 4.398 },
+  { name: "F480M", pivot: 4.834, bw: 0.303, blue: 4.662, red: 4.973 }
 ];
 
 const CEERS_FILTERS = [
-  { name: "F115W", pivot: 1.154, width: 0.225 },
-  { name: "F150W", pivot: 1.501, width: 0.318 },
-  { name: "F200W", pivot: 1.990, width: 0.461 },
-  { name: "F277W", pivot: 2.786, width: 0.672 },
-  { name: "F356W", pivot: 3.563, width: 0.787 },
-  { name: "F410M", pivot: 4.092, width: 0.436 },
-  { name: "F444W", pivot: 4.421, width: 1.024 }
+  { name: "F090W", pivot: 0.901, bw: 0.194, blue: 0.795, red: 1.005 },
+  { name: "F115W", pivot: 1.154, bw: 0.225, blue: 1.013, red: 1.282 },
+  { name: "F150W", pivot: 1.501, bw: 0.318, blue: 1.331, red: 1.668 },
+  { name: "F200W", pivot: 1.990, bw: 0.461, blue: 1.755, red: 2.227 },
+  { name: "F277W", pivot: 2.786, bw: 0.672, blue: 2.423, red: 3.132 },
+  { name: "F356W", pivot: 3.563, bw: 0.787, blue: 3.135, red: 3.981 },
+  { name: "F410M", pivot: 4.092, bw: 0.436, blue: 3.866, red: 4.302 },
+  { name: "F444W", pivot: 4.421, bw: 1.024, blue: 3.881, red: 4.982 }
+];
+
+/* MINERVA (Cycle 4 treasury, GO 7814) images eight medium bands over
+   AEGIS/CEERS. Six of them duplicate SPAM, so only the two it uniquely
+   adds are shown here. Those two complete the full set of twelve NIRCam
+   medium bands over this field, together with SPAM's nine and F410M
+   from CEERS.                                                        */
+
+const MINERVA_FILTERS = [
+  { name: "F250M", pivot: 2.503, bw: 0.181, blue: 2.412, red: 2.595 },
+  { name: "F460M", pivot: 4.624, bw: 0.228, blue: 4.515, red: 4.747 }
 ];
 
 /* ── Tabs ───────────────────────────────────────────────────── */
@@ -102,13 +119,13 @@ function drawCoverage() {
   if (!host) return;
 
   const width = 1000;
-  const height = 200;
+  const height = 210;
   const left = 10;
   const right = width - 10;
   const baseline = height - 40;
   const barHeight = 62;
 
-  const minWl = 0.62;
+  const minWl = 0.60;
   const maxWl = 5.3;
 
   function xFor(wavelength) {
@@ -116,14 +133,22 @@ function drawCoverage() {
     return left + fraction * (right - left);
   }
 
-  let svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" `;
-  svg += `aria-label="Wavelength coverage of the ten SPAM filters compared with existing CEERS filters, 0.7 to 4.8 microns">`;
+  // Everything a bar needs to describe itself when hovered.
+  function dataAttrs(filter, program) {
+    return `data-name="${filter.name}" data-program="${program}" `
+      + `data-pivot="${filter.pivot.toFixed(3)}" data-bw="${filter.bw.toFixed(3)}" `
+      + `data-blue="${filter.blue.toFixed(3)}" data-red="${filter.red.toFixed(3)}"`;
+  }
 
-  // CEERS bands sit behind, as a flat grey reference row.
+  let svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" `;
+  svg += `aria-label="NIRCam wavelength coverage from 0.6 to 5 microns: ten SPAM filters, `;
+  svg += `eight existing CEERS filters, and the two medium bands MINERVA adds">`;
+
+  // CEERS bands sit low, as a flat grey reference row.
   for (const filter of CEERS_FILTERS) {
-    const x0 = xFor(filter.pivot - filter.width / 2);
-    const x1 = xFor(filter.pivot + filter.width / 2);
-    svg += `<g class="band">`;
+    const x0 = xFor(filter.blue);
+    const x1 = xFor(filter.red);
+    svg += `<g class="band" tabindex="0" ${dataAttrs(filter, "Existing CEERS coverage")}>`;
     svg += `<rect x="${x0}" y="${baseline - 24}" width="${x1 - x0}" height="18" fill="#D6D8DC" rx="1"/>`;
     svg += `<text class="band__label" x="${(x0 + x1) / 2}" y="${baseline - 11}" text-anchor="middle">${filter.name}</text>`;
     svg += `</g>`;
@@ -132,17 +157,33 @@ function drawCoverage() {
   // SPAM bands sit above, all the same height. Only the horizontal extent
   // carries information, so nothing else is scaled.
   for (const filter of SPAM_FILTERS) {
-    const x0 = xFor(filter.pivot - filter.width / 2);
-    const x1 = xFor(filter.pivot + filter.width / 2);
+    const x0 = xFor(filter.blue);
+    const x1 = xFor(filter.red);
     const centre = (x0 + x1) / 2;
     const y = baseline - 30 - barHeight;
     const color = bandColor(filter.pivot);
 
-    svg += `<g class="band">`;
+    svg += `<g class="band" tabindex="0" ${dataAttrs(filter, "SPAM")}>`;
     svg += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="${barHeight}" fill="${color}" rx="1"/>`;
     svg += `<text class="band__label band__label--spam" x="${centre}" y="${y - 8}" text-anchor="start" `;
     svg += `transform="rotate(-90 ${centre} ${y - 8})">${filter.name}</text>`;
-    svg += `<title>${filter.name} — pivot ${filter.pivot} \u00B5m, width ${filter.width} \u00B5m</title>`;
+    svg += `</g>`;
+  }
+
+  // The two medium bands MINERVA adds that SPAM does not carry. Outlined
+  // rather than filled, so it is clear they come from a different program.
+  for (const filter of MINERVA_FILTERS) {
+    const x0 = xFor(filter.blue);
+    const x1 = xFor(filter.red);
+    const centre = (x0 + x1) / 2;
+    const y = baseline - 30 - barHeight;
+    const color = bandColor(filter.pivot);
+
+    svg += `<g class="band" tabindex="0" ${dataAttrs(filter, "MINERVA (GO 7814)")}>`;
+    svg += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="${barHeight}" fill="none" `;
+    svg += `stroke="${color}" stroke-width="2" stroke-dasharray="4 3" rx="1"/>`;
+    svg += `<text class="band__label band__label--minerva" x="${centre}" y="${y - 8}" text-anchor="start" `;
+    svg += `transform="rotate(-90 ${centre} ${y - 8})" style="fill:${color}">${filter.name}</text>`;
     svg += `</g>`;
   }
 
@@ -157,6 +198,61 @@ function drawCoverage() {
   svg += `</svg>`;
 
   host.innerHTML = svg;
+  attachTooltip(host);
+}
+
+/* Hover or focus a band to read its numbers. Uses one shared tooltip
+   element rather than SVG <title>, which browsers show only after a
+   delay and cannot style. */
+function attachTooltip(host) {
+  const tip = document.createElement("div");
+  tip.className = "tip";
+  tip.hidden = true;
+  host.appendChild(tip);
+
+  function show(group) {
+    const data = group.dataset;
+    tip.innerHTML =
+      `<span class="tip__name">${data.name}</span>` +
+      `<span class="tip__program">${data.program}</span>` +
+      `<dl class="tip__rows">` +
+      `<dt>Bandwidth</dt><dd>${data.bw} \u00B5m</dd>` +
+      `<dt>Pivot</dt><dd>${data.pivot} \u00B5m</dd>` +
+      `<dt>Half-power</dt><dd>${data.blue}\u2013${data.red} \u00B5m</dd>` +
+      `</dl>`;
+    tip.hidden = false;
+
+    // Position above the bar, clamped so it never runs off either edge.
+    const hostBox = host.getBoundingClientRect();
+    const barBox = group.getBoundingClientRect();
+    const centre = barBox.left + barBox.width / 2 - hostBox.left;
+    const halfTip = tip.offsetWidth / 2;
+    const clamped = Math.min(Math.max(centre, halfTip), hostBox.width - halfTip);
+
+    tip.style.left = clamped + "px";
+
+    // Prefer above the bar, but flip below when it would be clipped by the
+    // top of the figure.
+    const above = barBox.top - hostBox.top - tip.offsetHeight - 10;
+    if (above >= 0) {
+      tip.style.top = above + "px";
+    } else {
+      tip.style.top = (barBox.bottom - hostBox.top + 10) + "px";
+    }
+  }
+
+  function hide() {
+    tip.hidden = true;
+  }
+
+  for (const group of host.querySelectorAll(".band")) {
+    group.addEventListener("mouseenter", () => show(group));
+    group.addEventListener("focus", () => show(group));
+    group.addEventListener("mouseleave", hide);
+    group.addEventListener("blur", hide);
+  }
+
+  host.addEventListener("mouseleave", hide);
 }
 
 drawCoverage();
