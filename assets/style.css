@@ -118,20 +118,62 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
   margin: 0 0 1.25rem;
 }
 
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+}
+
 .hero__title {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(2.75rem, 9vw, 6rem);
-  letter-spacing: -0.045em;
-  line-height: 0.92;
-  margin: 0 0 1.5rem;
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 0 0 0.5rem;
 }
 
-.hero__lede {
-  max-width: 34rem;
-  font-size: 1.1rem;
+.hero__expansion {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
   color: var(--ink-2);
+  max-width: 26rem;
   margin: 0;
+}
+
+.hero__logo { margin: 0; }
+.hero__logo img {
+  display: block;
+  width: clamp(9rem, 22vw, 15rem);
+  height: auto;
+}
+
+/* Status line: the one thing most visitors arrive wanting to know. */
+.announce {
+  margin: 2.5rem 0 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--wl-4);
+  background: var(--card);
+  font-size: 0.98rem;
+  color: var(--ink-2);
+}
+.announce strong { color: var(--ink); }
+
+.credit {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero__logo { order: -1; }
+  .hero__logo img { width: 8rem; }
 }
 
 /* ── Coverage plot (the signature element) ──────────────────── */
@@ -268,4 +310,11 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
+}
+
+.card__note {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  margin: 0.6rem 0 0;
 }
