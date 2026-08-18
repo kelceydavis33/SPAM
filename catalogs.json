@@ -1,0 +1,13 @@
+[
+  {
+    "name": "SPAM DR1 photometric catalog",
+    "version": "v0.1 (placeholder)",
+    "released": "TBD",
+    "size": "—",
+    "format": "FITS",
+    "description": "Ten-band NIRCam photometry over the CEERS field, matched to the public CEERS catalog. Replace this entry when DR1 is ready.",
+    "download": "",
+    "doi": "",
+    "readme": ""
+  }
+]
