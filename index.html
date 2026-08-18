@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPAM — Star-formation from Photometry through the Addition of Medium-bands</title>
+<meta name="description" content="SPAM adds ten NIRCam filters to the CEERS legacy field. JWST Cycle 4 GO Program 8559.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <a class="wordmark" href="#overview">
+    <span class="wordmark__name">SPAM</span>
+    <span class="wordmark__id">JWST GO 8559</span>
+  </a>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="tab-overview"  aria-controls="panel-overview"  data-panel="overview">Overview</button>
+    <button class="tab" role="tab" id="tab-catalogs"  aria-controls="panel-catalogs"  data-panel="catalogs">Catalogs</button>
+    <button class="tab" role="tab" id="tab-team"      aria-controls="panel-team"      data-panel="team">Team</button>
+    <button class="tab" role="tab" id="tab-papers"    aria-controls="panel-papers"    data-panel="papers">Papers</button>
+    <button class="tab" role="tab" id="tab-arxiv"     aria-controls="panel-arxiv"     data-panel="arxiv">arXiv feed</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ── Overview ─────────────────────────────────────────────── -->
+  <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+
+    <div class="hero">
+      <p class="eyebrow">Cycle 4 · NIRCam imaging · 62.9 hours · non-proprietary</p>
+      <h1 class="hero__title">Ten new filters<br>over CEERS.</h1>
+      <p class="hero__lede">
+        SPAM adds nine medium bands and one wide band to the CEERS Early-Release Science
+        field, bracketing the Balmer break and tracing [O&nbsp;III] emission out to the
+        earliest known reionized bubbles.
+      </p>
+    </div>
+
+    <figure class="coverage">
+      <figcaption class="coverage__caption">
+        <span class="key"><span class="key__swatch key__swatch--spam"></span>SPAM filters</span>
+        <span class="key"><span class="key__swatch key__swatch--ceers"></span>Existing CEERS coverage</span>
+      </figcaption>
+      <div id="coverage-plot"></div>
+    </figure>
+
+    <div class="prose">
+      <h2>Abstract</h2>
+      <p>
+        SPAM (Star-formation from Photometry through the Addition of Medium-bands) is a NIRCam
+        imaging program adding ten filters — F070W, F140M, F162M, F182M, F210M, F300M, F335M,
+        F360M, F430M and F480M — to the CEERS Early-Release Science legacy dataset (ERS&nbsp;#1345).
+      </p>
+      <p>The program is built around three goals:</p>
+      <ol>
+        <li>
+          Measure the extent and occupation of two overdensities that may power the earliest-known
+          reionized bubbles at <em>z</em>&nbsp;=&nbsp;7.7 and 8.7, by tracing strong [O&nbsp;III] emission
+          and improving photometric-redshift precision by 5–10× over CEERS alone.
+        </li>
+        <li>
+          Break photometric redshift degeneracies and reliably map galaxy evolution at <em>z</em>&nbsp;&gt;&nbsp;2.
+        </li>
+        <li>
+          Constrain star-formation histories of massive galaxies at <em>z</em>&nbsp;&gt;&nbsp;4 using five
+          short-wavelength medium bands bracketing the Balmer break.
+        </li>
+      </ol>
+      <p>
+        All 62.9 hours are non-proprietary and add directly to the public CEERS legacy data.
+      </p>
+      <p class="prose__links">
+        <a href="https://www.stsci.edu/jwst-program-info/download/jwst/pdf/8559/">Approved proposal (PDF)</a>
+        <a href="https://github.com/kelceydavis33/SPAM">Repository</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Catalogs ─────────────────────────────────────────────── -->
+  <section class="panel" id="panel-catalogs" role="tabpanel" aria-labelledby="tab-catalogs" hidden>
+    <h1 class="panel__title">Catalogs</h1>
+    <p class="panel__lede">
+      Photometric catalogs and supporting files. Each release is archived with a DOI —
+      cite the version you actually used.
+    </p>
+    <div id="catalog-list" class="stack" data-loading="Loading catalogs…"></div>
+  </section>
+
+  <!-- ── Team ─────────────────────────────────────────────────── -->
+  <section class="panel" id="panel-team" role="tabpanel" aria-labelledby="tab-team" hidden>
+    <h1 class="panel__title">Team</h1>
+    <p class="panel__lede">The people building SPAM and the science it feeds.</p>
+    <div id="team-list" data-loading="Loading team…"></div>
+  </section>
+
+  <!-- ── Papers ───────────────────────────────────────────────── -->
+  <section class="panel" id="panel-papers" role="tabpanel" aria-labelledby="tab-papers" hidden>
+    <h1 class="panel__title">Team papers</h1>
+    <p class="panel__lede">
+      Curated by the team. For anything that mentions SPAM in an abstract,
+      see the <a href="#arxiv">arXiv feed</a>.
+    </p>
+    <div id="paper-list" class="stack" data-loading="Loading papers…"></div>
+  </section>
+
+  <!-- ── arXiv ────────────────────────────────────────────────── -->
+  <section class="panel" id="panel-arxiv" role="tabpanel" aria-labelledby="tab-arxiv" hidden>
+    <h1 class="panel__title">arXiv feed</h1>
+    <p class="panel__lede">
+      Preprints whose abstracts mention SPAM alongside JWST, NIRCam or CEERS.
+      Collected automatically each week — this list is unfiltered, so treat it as a
+      starting point rather than a verified bibliography.
+    </p>
+    <p class="stamp" id="arxiv-stamp"></p>
+    <div id="arxiv-list" class="stack" data-loading="Loading preprints…"></div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <p>SPAM — JWST Cycle 4 GO Program 8559. Logo by Julie Wakefield, UConn Design Center.</p>
+  <p>Filter bandpasses drawn from nominal NIRCam pivot wavelengths and widths.</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
