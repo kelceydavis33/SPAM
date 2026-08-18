@@ -1,13 +1,11 @@
 [
   {
-    "group": "Principal investigator",
+    "group": "Principal investigators",
     "members": [
       {
-        "name": "Kelcey Davis",
+        "name": "Kelcey Davis, Rebecca Larson",
         "role": "PI",
-        "institution": "University of Connecticut",
-        "website": "https://github.com/kelceydavis33",
-        "orcid": ""
+        "institution": "University of Connecticut, The Space Telescope Institute"
       }
     ]
   },
@@ -18,20 +16,6 @@
         "name": "Add a name",
         "role": "Co-I",
         "institution": "Institution",
-        "website": "",
-        "orcid": "0000-0000-0000-0000"
-      }
-    ]
-  },
-  {
-    "group": "Students and postdocs",
-    "members": [
-      {
-        "name": "Add a name",
-        "role": "Graduate student",
-        "institution": "Institution",
-        "website": "",
-        "orcid": ""
       }
     ]
   }
