@@ -196,7 +196,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
 #coverage-plot svg { width: 100%; height: auto; display: block; overflow: visible; }
 
 .band { transition: opacity .15s ease; cursor: default; }
-.coverage:hover .band { opacity: .35; }
+.coverage:hover .band { opacity: .45; }
 .coverage .band:hover { opacity: 1; }
 
 .band__label { font-family: var(--mono); font-size: 9.5px; fill: var(--ink-2); }
@@ -317,4 +317,70 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
   font-size: 0.7rem;
   color: var(--ink-3);
   margin: 0.6rem 0 0;
+}
+
+/* ── Coverage plot tooltip ──────────────────────────────────── */
+#coverage-plot { position: relative; }
+
+.tip {
+  position: absolute;
+  z-index: 5;
+  transform: translateX(-50%);
+  pointer-events: none;
+  min-width: 11rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 3px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+}
+.tip[hidden] { display: none; }
+
+.tip__name {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.tip__program {
+  display: block;
+  font-family: var(--body);
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+.tip__rows {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.75rem;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+.tip__rows dt { color: var(--ink-3); }
+.tip__rows dd { margin: 0; text-align: right; white-space: nowrap; }
+
+.band { outline: none; }
+
+/* The MINERVA bands are drawn with fill:none, so without this only their
+   2px dashed outline would be hoverable. pointer-events:all makes the
+   whole interior a target regardless of fill. */
+.band rect { pointer-events: all; }
+.band text { pointer-events: none; }
+
+.band:focus-visible rect { stroke: var(--ink); stroke-width: 2; }
+.band__label--minerva { font-size: 11px; font-weight: 500; }
+
+.key__swatch--minerva {
+  background: transparent;
+  border: 1.5px dashed var(--wl-3);
+  height: 0.6rem;
+}
+
+.source-note {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  margin: 0.9rem 0 0;
 }
