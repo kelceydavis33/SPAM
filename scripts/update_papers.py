@@ -25,23 +25,48 @@ ARXIV_API = "http://export.arxiv.org/api/query"
 ADS_API = "https://api.adsabs.harvard.edu/v1/search/query"
 ATOM = "{http://www.w3.org/2005/Atom}"
 
-# "SPAM" alone is hopeless -- it collides with the e-mail filtering literature.
-# Every query pairs it with something only this field would say.
-ARXIV_QUERIES = [
-    'cat:astro-ph.GA AND abs:"SPAM" AND abs:"JWST"',
-    'cat:astro-ph.GA AND abs:"SPAM" AND abs:"CEERS"',
-    'cat:astro-ph.GA AND abs:"SPAM" AND abs:"medium-band"',
-    'abs:"Star-formation from Photometry through the Addition of Medium-bands"',
-    'abs:"GO 8559" OR abs:"Program 8559"',
-]
+# Queries are grouped by what they catch. A paper can match several groups and
+# carries every tag it matched, so the page can filter on them.
+#
+# Two name collisions shape these. "SPAM" hits the e-mail filtering literature,
+# so it is always paired with a term only this field uses. "MINERVA" is also the
+# Miniature Exoplanet Radial Velocity Array, so it is never searched alone.
+ARXIV_QUERIES = {
+    "SPAM": [
+        'cat:astro-ph.GA AND abs:"SPAM" AND abs:"JWST"',
+        'cat:astro-ph.GA AND abs:"SPAM" AND abs:"CEERS"',
+        'cat:astro-ph.GA AND abs:"SPAM" AND abs:"medium-band"',
+        'abs:"Star-formation from Photometry through the Addition of Medium-bands"',
+        'abs:"GO 8559" OR abs:"Program 8559"',
+    ],
+    # Both words, not either. Precise enough to need no other guard, and it is
+    # what finds the MINERVA survey paper, whose abstract names CEERS.
+    "MINERVA": [
+        'cat:astro-ph.GA AND abs:"MINERVA" AND abs:"CEERS"',
+        'abs:"Medium-band Imaging with NIRCam to Explore ReVolutionary Astrophysics"',
+        'abs:"GO 7814" OR abs:"Program 7814"',
+    ],
+}
+
+# Papers that never name a program in the abstract are reached through ADS full
+# text instead -- see ADS_QUERIES below. An abstract-level net wide enough to
+# catch them would return most medium-band imaging work regardless of field.
+
+RESULTS_PER_QUERY = 60
 
 # full: covers title, abstract, body and acknowledgements. database:astronomy
 # keeps the physics and general-science corpus out.
+#
+# Full text is the only way to reach papers that use the data but name no
+# program in the abstract, since the program ID nearly always appears in the
+# data section. Deliberately not searching full text for "CEERS" alone, which
+# would return a large slice of the extragalactic literature.
 ADS_QUERIES = [
     'full:"SPAM" AND full:"CEERS" AND database:astronomy',
     'full:"SPAM" AND full:"NIRCam" AND database:astronomy',
     'full:"Star-formation from Photometry through the Addition of Medium-bands"',
     '(full:"GO 8559" OR full:"Program 8559" OR full:"JWST-GO-8559") AND database:astronomy',
+    '(full:"GO 7814" OR full:"Program 7814" OR full:"JWST-GO-7814") AND database:astronomy',
 ]
 
 # IDs to suppress -- arXiv numbers or ADS bibcodes -- for false positives.
@@ -148,24 +173,41 @@ def ads_parse(payload):
     return papers
 
 
+def add(found, paper, tag):
+    """Record a paper, merging tags when several queries turn up the same one."""
+    if paper["id"] in IGNORE:
+        return
+    existing = found.get(paper["id"])
+    if existing:
+        if tag not in existing["tags"]:
+            existing["tags"].append(tag)
+        # An arXiv hit means the abstract names it, which beats a full-text hit.
+        if existing["source"] == "ads" and paper["source"] == "arxiv":
+            paper["tags"] = existing["tags"]
+            found[paper["id"]] = paper
+    else:
+        paper["tags"] = [tag]
+        found[paper["id"]] = paper
+
+
 def main():
     found = {}
 
-    for query in ARXIV_QUERIES:
-        print("arXiv:", query)
-        try:
-            papers = arxiv_parse(arxiv_fetch(query))
-        except Exception as error:
-            print("  failed:", error)
-            continue
+    for tag, queries in ARXIV_QUERIES.items():
+        for query in queries:
+            print("arXiv [" + tag + "]:", query)
+            try:
+                papers = arxiv_parse(arxiv_fetch(query, RESULTS_PER_QUERY))
+            except Exception as error:
+                print("  failed:", error)
+                continue
 
-        print("  got", len(papers))
-        for paper in papers:
-            if paper["id"] not in IGNORE:
-                found[paper["id"]] = paper
+            print("  got", len(papers))
+            for paper in papers:
+                add(found, paper, tag)
 
-        # arXiv asks for a few seconds between requests.
-        time.sleep(3)
+            # arXiv asks for a few seconds between requests.
+            time.sleep(3)
 
     token = os.environ.get("ADS_TOKEN", "").strip()
 
@@ -182,21 +224,22 @@ def main():
 
             print("  got", len(papers))
             for paper in papers:
-                if paper["id"] in IGNORE:
-                    continue
-                # An arXiv hit already means the abstract mentions SPAM, which is
-                # the stronger signal, so do not let ADS overwrite it.
-                if paper["id"] not in found:
-                    found[paper["id"]] = paper
+                add(found, paper, "Full text")
 
             time.sleep(1)
 
     papers = list(found.values())
     papers.sort(key=lambda paper: paper["published"], reverse=True)
 
+    counts = {}
+    for paper in papers:
+        for tag in paper["tags"]:
+            counts[tag] = counts.get(tag, 0) + 1
+
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "full_text_search": bool(token),
+        "tags": list(ARXIV_QUERIES.keys()) + (["Full text"] if token else []),
         "papers": papers,
     }
 
@@ -204,6 +247,8 @@ def main():
         json.dump(output, handle, indent=2)
 
     print("Wrote", len(papers), "papers to data/arxiv.json")
+    for tag, count in sorted(counts.items()):
+        print("  " + tag + ":", count)
 
 
 if __name__ == "__main__":
