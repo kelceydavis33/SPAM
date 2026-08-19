@@ -426,3 +426,61 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
   color: var(--ink-3);
   margin: 0.35rem 0 0;
 }
+
+/* ── Paper filters ──────────────────────────────────────────── */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+.filter {
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.65rem;
+  background: none;
+  color: var(--ink-2);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+.filter:hover { border-color: var(--ink-3); color: var(--ink); }
+.filter[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.filter__count { opacity: 0.55; margin-left: 0.15rem; }
+
+.chip--tag { color: var(--wl-3); border-color: currentColor; }
+
+/* ── Data release extras ────────────────────────────────────── */
+.status-badge {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--wl-4);
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 0.1rem 0.4rem;
+  white-space: nowrap;
+}
+
+.card__cite {
+  margin: 0.9rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.86rem;
+  color: var(--ink-2);
+}
+.card__cite-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-right: 0.5rem;
+}
