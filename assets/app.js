@@ -303,16 +303,32 @@ async function renderCatalogs() {
   let html = "";
   for (const item of items) {
     html += `<article class="card">`;
+
     html += `<div class="card__head">`;
     html += `<h2 class="card__title">${escapeHtml(item.name)}</h2>`;
-    html += `<span class="card__meta">${escapeHtml(item.version)} · ${escapeHtml(item.released)} · ${escapeHtml(item.size)}</span>`;
+    // Only join the parts that are actually filled in, so an unreleased
+    // catalog does not render as a row of empty separators.
+    const meta = [item.version, item.released, item.size].filter(Boolean);
+    if (meta.length) html += `<span class="card__meta">${escapeHtml(meta.join(" · "))}</span>`;
+    if (item.status) html += `<span class="status-badge">${escapeHtml(item.status)}</span>`;
     html += `</div>`;
-    html += `<p class="card__body">${escapeHtml(item.description)}</p>`;
-    html += `<div class="chips">`;
-    if (item.download) html += `<a class="chip chip--download" href="${escapeHtml(item.download)}">Download ${escapeHtml(item.format)}</a>`;
-    if (item.doi)      html += `<a class="chip" href="${escapeHtml(item.doi)}">DOI</a>`;
-    if (item.readme)   html += `<a class="chip" href="${escapeHtml(item.readme)}">Column descriptions</a>`;
-    html += `</div></article>`;
+
+    if (item.description) html += `<p class="card__body">${escapeHtml(item.description)}</p>`;
+
+    if (item.citation) {
+      html += `<p class="card__cite"><span class="card__cite-label">Cite as</span> `;
+      html += `${escapeHtml(item.citation)}</p>`;
+    }
+
+    if (item.download || item.doi || item.readme) {
+      html += `<div class="chips">`;
+      if (item.download) html += `<a class="chip chip--download" href="${escapeHtml(item.download)}">Download ${escapeHtml(item.format || "")}</a>`;
+      if (item.doi)      html += `<a class="chip" href="${escapeHtml(item.doi)}">DOI</a>`;
+      if (item.readme)   html += `<a class="chip" href="${escapeHtml(item.readme)}">Column descriptions</a>`;
+      html += `</div>`;
+    }
+
+    html += `</article>`;
   }
   host.innerHTML = html;
 }
@@ -392,8 +408,14 @@ async function renderPapers() {
   for (const item of items) {
     html += `<article class="card">`;
     html += `<div class="card__head">`;
-    html += `<h2 class="card__title"><a href="${escapeHtml(item.url)}">${escapeHtml(item.title)}</a></h2>`;
-    html += `<span class="card__meta">${escapeHtml(item.year)} · ${escapeHtml(item.journal)}</span>`;
+    // Papers in preparation have no link yet.
+    if (item.url) {
+      html += `<h2 class="card__title"><a href="${escapeHtml(item.url)}">${escapeHtml(item.title)}</a></h2>`;
+    } else {
+      html += `<h2 class="card__title">${escapeHtml(item.title)}</h2>`;
+    }
+    const meta = [item.year, item.journal].filter(Boolean);
+    if (meta.length) html += `<span class="card__meta">${escapeHtml(meta.join(" · "))}</span>`;
     html += `</div>`;
     html += `<p class="card__authors">${escapeHtml(item.authors)}</p>`;
     html += `</article>`;
@@ -401,7 +423,8 @@ async function renderPapers() {
   host.innerHTML = html;
 }
 
-/* arXiv feed */
+/* arXiv feed, with tag filtering */
+
 async function renderArxiv() {
   const host = document.getElementById("arxiv-list");
   const stamp = document.getElementById("arxiv-stamp");
@@ -415,34 +438,79 @@ async function renderArxiv() {
 
   if (feed.generated_at) {
     const when = new Date(feed.generated_at);
-    const scope = feed.full_text_search ? "arXiv abstracts + ADS full text" : "arXiv abstracts only";
+    const scope = feed.full_text_search ? "abstracts + ADS full text" : "abstracts only";
     stamp.textContent = "Last checked " + when.toISOString().slice(0, 10) + " \u00B7 " + scope;
   }
 
-  if (feed.papers.length === 0) {
-    showEmpty(host, "No matching preprints yet. The collector runs every Monday.");
+  if (!feed.papers || feed.papers.length === 0) {
+    showEmpty(host, "No matching papers yet. The collector runs every Monday.");
     return;
   }
 
-  let html = "";
+  // Count each tag so the filter buttons can show how much is behind them.
+  const counts = {};
   for (const paper of feed.papers) {
-    // ADS hits without an arXiv posting are keyed by bibcode, which should not
-    // be labelled as an arXiv number.
+    for (const tag of paper.tags || []) {
+      counts[tag] = (counts[tag] || 0) + 1;
+    }
+  }
+  const tags = (feed.tags || Object.keys(counts)).filter(tag => counts[tag]);
+
+  function cardFor(paper) {
+    // ADS hits without an arXiv posting are keyed by bibcode, not an arXiv number.
     const looksLikeArxivId = /^\d{4}\.\d{4,5}$/.test(paper.id);
     const label = looksLikeArxivId ? "arXiv:" + paper.id : paper.id;
 
-    html += `<article class="card">`;
+    let html = `<article class="card">`;
     html += `<div class="card__head">`;
     html += `<h2 class="card__title"><a href="${escapeHtml(paper.url)}">${escapeHtml(paper.title)}</a></h2>`;
-    html += `<span class="card__meta">${escapeHtml(label)} · ${escapeHtml(paper.published.slice(0, 10))}</span>`;
+    html += `<span class="card__meta">${escapeHtml(label)} \u00B7 ${escapeHtml(paper.published.slice(0, 10))}</span>`;
     html += `</div>`;
     html += `<p class="card__authors">${escapeHtml(paper.authors)}</p>`;
-    if (paper.source === "ads") {
-      html += `<p class="card__note">Matched on full text, not the abstract.</p>`;
+    if (paper.tags && paper.tags.length) {
+      html += `<div class="chips">`;
+      for (const tag of paper.tags) {
+        html += `<span class="chip chip--tag">${escapeHtml(tag)}</span>`;
+      }
+      html += `</div>`;
     }
-    html += `</article>`;
+    return html + `</article>`;
   }
-  host.innerHTML = html;
+
+  let filter = "All";
+
+  function draw() {
+    const shown = filter === "All"
+      ? feed.papers
+      : feed.papers.filter(paper => (paper.tags || []).includes(filter));
+
+    let html = `<div class="filters" role="group" aria-label="Filter papers">`;
+    const buttons = ["All"].concat(tags);
+    for (const tag of buttons) {
+      const count = tag === "All" ? feed.papers.length : counts[tag];
+      const active = tag === filter ? ' aria-pressed="true"' : ' aria-pressed="false"';
+      html += `<button class="filter" data-tag="${escapeHtml(tag)}"${active}>`;
+      html += `${escapeHtml(tag)} <span class="filter__count">${count}</span></button>`;
+    }
+    html += `</div>`;
+
+    if (shown.length === 0) {
+      html += `<div class="empty">Nothing tagged ${escapeHtml(filter)} yet.</div>`;
+    } else {
+      html += `<div class="stack">` + shown.map(cardFor).join("") + `</div>`;
+    }
+
+    host.innerHTML = html;
+
+    for (const button of host.querySelectorAll(".filter")) {
+      button.addEventListener("click", () => {
+        filter = button.dataset.tag;
+        draw();
+      });
+    }
+  }
+
+  draw();
 }
 
 renderCatalogs();
