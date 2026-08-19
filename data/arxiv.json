@@ -1,5 +1,21 @@
 {
-  "generated_at": "2026-08-18T21:14:59.340426+00:00",
+  "generated_at": "2026-08-19T00:51:56.223754+00:00",
   "full_text_search": false,
-  "papers": []
+  "tags": [
+    "SPAM",
+    "MINERVA"
+  ],
+  "papers": [
+    {
+      "id": "2507.19706",
+      "title": "MINERVA: A NIRCam Medium Band and MIRI Imaging Survey to Unlock the Hidden Gems of the Distant Universe",
+      "authors": "Adam Muzzin, Katherine A. Suess, Danilo Marchesini, Luke Robbins, et al.",
+      "published": "2025-07-25T22:51:37Z",
+      "url": "https://arxiv.org/abs/2507.19706",
+      "source": "arxiv",
+      "tags": [
+        "MINERVA"
+      ]
+    }
+  ]
 }
