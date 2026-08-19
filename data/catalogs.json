@@ -1,11 +1,9 @@
 [
   {
-    "name": "SPAM DR1 photometric catalog",
-    "version": "v0.1 (placeholder)",
-    "released": "TBD",
-    "size": "—",
-    "format": "FITS",
-    "description": "Ten-band NIRCam photometry over the CEERS field, matched to the public CEERS catalog. Replace this entry when DR1 is ready.",
+    "name": "DR1 — Photometric catalog",
+    "status": "Coming soon",
+    "description": "Photometry catalog including the SPAM, MINERVA, and legacy CEERS filters as well as public NIRCam parallels in the legacy CEERS footprint.",
+    "citation": "Larson & Davis 2026 (in prep)",
     "download": "",
     "doi": "",
     "readme": ""
