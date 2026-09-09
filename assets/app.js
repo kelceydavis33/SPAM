@@ -374,7 +374,18 @@ async function renderImages() {
   html += `<th scope="col">Program</th>`;
   html += `<th scope="col" class="num">Pivot</th>`;
   for (const key of products) {
-    html += `<th scope="col" class="dl">${escapeHtml(labels[key] || key.toUpperCase())}</th>`;
+    const available = filters.filter(f => (f.files || {})[key] && f.files[key].file);
+    const label = labels[key] || key.toUpperCase();
+    html += `<th scope="col" class="dl">`;
+    html += `<span class="dl__head">${escapeHtml(label)}</span>`;
+    if (available.length) {
+      html += `<button class="chip chip--all" type="button" data-product="${escapeHtml(key)}" `;
+      html += `title="Download a list of all ${available.length} ${label.toLowerCase()} URLs `;
+      html += `(${totalSize(available, key)} of data, not downloaded here)">`;
+      html += `&darr; ALL ${available.length}</button>`;
+      html += `<span class="dl__size">${escapeHtml(totalSize(available, key))} · URL list</span>`;
+    }
+    html += `</th>`;
   }
   html += `</tr></thead><tbody>`;
 
@@ -405,9 +416,57 @@ async function renderImages() {
 
   html += `</tbody></table></div>`;
 
+  if (data.bulk_note) html += `<p class="source-note">${escapeHtml(data.bulk_note)}</p>`;
   if (data.note) html += `<p class="source-note">${escapeHtml(data.note)}</p>`;
 
   host.innerHTML = html;
+
+  for (const button of host.querySelectorAll(".chip--all")) {
+    button.addEventListener("click", () => {
+      const key = button.dataset.product;
+      saveUrlList(urlsFor(data, key), `spam_nrc_${key}_urls.txt`);
+      // Confirm in place; the browser gives no feedback for a 1 KB text file.
+      const original = button.textContent;
+      button.textContent = "\u2713 SAVED";
+      setTimeout(() => { button.textContent = original; }, 2000);
+    });
+  }
+}
+
+/* Sum the per-file sizes in a column, so the header can warn how much
+   data the list actually points at. Sizes are strings like "2.5 GB". */
+function totalSize(filters, key) {
+  let gigabytes = 0;
+  for (const filter of filters) {
+    const size = (filter.files[key].size || "").trim();
+    const value = parseFloat(size);
+    if (Number.isNaN(value)) continue;
+    if (/tb/i.test(size)) gigabytes += value * 1024;
+    else if (/mb/i.test(size)) gigabytes += value / 1024;
+    else gigabytes += value;
+  }
+  if (gigabytes >= 1024) return (gigabytes / 1024).toFixed(1) + " TB";
+  return Math.round(gigabytes) + " GB";
+}
+
+function urlsFor(data, key) {
+  return (data.filters || [])
+    .filter(filter => (filter.files || {})[key] && filter.files[key].file)
+    .map(filter => data.base + filter.files[key].file);
+}
+
+/* Write the URL list to a file the user can hand to wget or curl. Plain
+   URLs, one per line, no comments — wget -i treats every line as a URL. */
+function saveUrlList(urls, filename) {
+  const blob = new Blob([urls.join("\n") + "\n"], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 /* Team: one row per person, affiliations alongside the name. */
