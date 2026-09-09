@@ -383,7 +383,6 @@ async function renderImages() {
       html += `title="Download a list of all ${available.length} ${label.toLowerCase()} URLs `;
       html += `(${totalSize(available, key)} of data, not downloaded here)">`;
       html += `&darr; ALL ${available.length}</button>`;
-      html += `.txt file with URL list</span>`;
     }
     html += `</th>`;
   }
