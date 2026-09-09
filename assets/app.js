@@ -284,52 +284,129 @@ function showEmpty(host, message) {
   host.innerHTML = `<div class="empty">${escapeHtml(message)}</div>`;
 }
 
-/* Catalogs */
-async function renderCatalogs() {
-  const host = document.getElementById("catalog-list");
-  let items;
+/* Catalog release: where the catalogs live, and what to cite. */
+async function renderRelease() {
+  const host = document.getElementById("catalog-release");
+  let data;
   try {
-    items = await loadJson("data/catalogs.json");
+    data = await loadJson("data/catalogs.json");
   } catch (error) {
     showError(host, "data/catalogs.json");
     return;
   }
 
-  if (items.length === 0) {
-    showEmpty(host, "No catalogs released yet. First data release expected 2025/2026.");
+  let html = `<article class="release">`;
+
+  html += `<div class="card__head">`;
+  html += `<h2 class="card__title">Catalogs and photometric redshifts</h2>`;
+  if (data.version) html += `<span class="status-badge">${escapeHtml(data.version)}</span>`;
+  html += `</div>`;
+
+  if (data.summary) html += `<p class="release__summary">${escapeHtml(data.summary)}</p>`;
+
+  if (data.host_url) {
+    html += `<p class="release__host">`;
+    html += `<a class="release__link" href="${escapeHtml(data.host_url)}">`;
+    html += `${escapeHtml(data.host_label || data.host_url)}</a>`;
+    html += `</p>`;
+  }
+
+  if (data.contents && data.contents.length) {
+    html += `<ul class="release__contents">`;
+    for (const line of data.contents) html += `<li>${escapeHtml(line)}</li>`;
+    html += `</ul>`;
+  }
+
+  if (data.citations && data.citations.length) {
+    html += `<div class="card__cite">`;
+    html += `<span class="card__cite-label">Cite</span>`;
+    if (data.citation_request) {
+      html += `<p class="release__cite-ask">${escapeHtml(data.citation_request)}</p>`;
+    }
+    html += `<ul class="release__cites">`;
+    for (const cite of data.citations) {
+      html += `<li>`;
+      // Papers in preparation have no link yet.
+      html += cite.url
+        ? `<a href="${escapeHtml(cite.url)}">${escapeHtml(cite.text)}</a>`
+        : escapeHtml(cite.text);
+      if (cite.note) html += ` <span class="release__cite-note">${escapeHtml(cite.note)}</span>`;
+      html += `</li>`;
+    }
+    html += `</ul></div>`;
+  }
+
+  html += `</article>`;
+  host.innerHTML = html;
+}
+
+/* Reduced mosaics: one row per filter, a button per data product.
+
+   The manifest lists NIRCam only. The same directory on the server also
+   holds HST ACS and WFC3 mosaics belonging to another team; those are
+   deliberately absent from data/images.json and should stay that way. */
+
+async function renderImages() {
+  const host = document.getElementById("image-list");
+  let data;
+  try {
+    data = await loadJson("data/images.json");
+  } catch (error) {
+    showError(host, "data/images.json");
     return;
   }
 
-  let html = "";
-  for (const item of items) {
-    html += `<article class="card">`;
-
-    html += `<div class="card__head">`;
-    html += `<h2 class="card__title">${escapeHtml(item.name)}</h2>`;
-    // Only join the parts that are actually filled in, so an unreleased
-    // catalog does not render as a row of empty separators.
-    const meta = [item.version, item.released, item.size].filter(Boolean);
-    if (meta.length) html += `<span class="card__meta">${escapeHtml(meta.join(" · "))}</span>`;
-    if (item.status) html += `<span class="status-badge">${escapeHtml(item.status)}</span>`;
-    html += `</div>`;
-
-    if (item.description) html += `<p class="card__body">${escapeHtml(item.description)}</p>`;
-
-    if (item.citation) {
-      html += `<p class="card__cite"><span class="card__cite-label">Cite as</span> `;
-      html += `${escapeHtml(item.citation)}</p>`;
-    }
-
-    if (item.download || item.doi || item.readme) {
-      html += `<div class="chips">`;
-      if (item.download) html += `<a class="chip chip--download" href="${escapeHtml(item.download)}">Download ${escapeHtml(item.format || "")}</a>`;
-      if (item.doi)      html += `<a class="chip" href="${escapeHtml(item.doi)}">DOI</a>`;
-      if (item.readme)   html += `<a class="chip" href="${escapeHtml(item.readme)}">Column descriptions</a>`;
-      html += `</div>`;
-    }
-
-    html += `</article>`;
+  const filters = data.filters || [];
+  if (filters.length === 0) {
+    showEmpty(host, "No mosaics released yet.");
+    return;
   }
+
+  // Column order is fixed rather than read from the data, so a filter
+  // missing one product still lines up with the rest of the table.
+  const products = ["sci", "err", "wht"];
+  const labels = data.products || { sci: "Science", err: "Error", wht: "Weight" };
+
+  let html = `<div class="table-scroll"><table class="filters-table">`;
+  html += `<caption class="sr-only">Reduced NIRCam mosaics by filter</caption>`;
+  html += `<thead><tr>`;
+  html += `<th scope="col">Filter</th>`;
+  html += `<th scope="col">Program</th>`;
+  html += `<th scope="col" class="num">Pivot</th>`;
+  for (const key of products) {
+    html += `<th scope="col" class="dl">${escapeHtml(labels[key] || key.toUpperCase())}</th>`;
+  }
+  html += `</tr></thead><tbody>`;
+
+  for (const filter of filters) {
+    html += `<tr>`;
+    html += `<th scope="row" class="filters-table__name">${escapeHtml(filter.name)}</th>`;
+    html += `<td class="filters-table__program">${escapeHtml(filter.program || "")}</td>`;
+    html += `<td class="num">${filter.pivot ? escapeHtml(filter.pivot.toFixed(3)) : ""}</td>`;
+
+    for (const key of products) {
+      const product = (filter.files || {})[key];
+      if (!product || !product.file) {
+        html += `<td class="dl"><span class="dl__none">&mdash;</span></td>`;
+        continue;
+      }
+      const url = data.base + product.file;
+      const title = `${filter.name} ${labels[key] || key} — ${product.file}`
+        + (product.size ? ` (${product.size})` : "");
+      html += `<td class="dl">`;
+      html += `<a class="chip chip--download" href="${escapeHtml(url)}" `;
+      html += `download title="${escapeHtml(title)}">`;
+      html += `&darr; ${escapeHtml(key.toUpperCase())}</a>`;
+      if (product.size) html += `<span class="dl__size">${escapeHtml(product.size)}</span>`;
+      html += `</td>`;
+    }
+    html += `</tr>`;
+  }
+
+  html += `</tbody></table></div>`;
+
+  if (data.note) html += `<p class="source-note">${escapeHtml(data.note)}</p>`;
+
   host.innerHTML = html;
 }
 
@@ -513,7 +590,8 @@ async function renderArxiv() {
   draw();
 }
 
-renderCatalogs();
+renderRelease();
+renderImages();
 renderTeam();
 renderPapers();
 renderArxiv();
