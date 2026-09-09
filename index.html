@@ -101,9 +101,21 @@
   <section class="panel" id="panel-catalogs" role="tabpanel" aria-labelledby="tab-catalogs" hidden>
     <h1 class="panel__title">Data releases</h1>
     <p class="panel__lede">
-      Photometric catalogs and supporting files, coming soon
+      Photometric catalogs, photometric redshifts, and the reduced NIRCam mosaics.
     </p>
-    <div id="catalog-list" class="stack" data-loading="Loading data releases…"></div>
+
+    <div id="catalog-release" data-loading="Loading release details…"></div>
+
+    <section class="subsection">
+      <h2 class="subsection__title">Reduced mosaics</h2>
+      <p class="subsection__lede">
+        Drizzled NIRCam mosaics on a common pixel grid, one row per filter. Every
+        filter has a science image, an error map and a weight map. Files run to
+        roughly 2.5&nbsp;GB each, so <code>wget -c</code> or a download manager is
+        worth using in preference to a browser.
+      </p>
+      <div id="image-list" data-loading="Loading mosaics…"></div>
+    </section>
   </section>
 
   <!-- ── Team ─────────────────────────────────────────────────── -->
