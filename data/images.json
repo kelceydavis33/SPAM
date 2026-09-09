@@ -6,19 +6,19 @@
     "intro": "Each \u2193 ALL button saves a list of URLs to a text file for download management.",
     "steps": [
       {
-        "text": "Click \u2193 ALL at the top of the column you want. A small text file lands in your downloads: spam_nrc_sci_urls.txt for the science mosaics, spam_nrc_err_urls.txt or spam_nrc_wht_urls.txt for the error and weight maps. It holds one URL per line and nothing else.",
+        "text": "Click \u2193 ALL at the top of the column you want. This downloads a text file: spam_nrc_sci_urls.txt for the science mosaics, spam_nrc_err_urls.txt or spam_nrc_wht_urls.txt for the error and weight maps.",
         "command": ""
       },
       {
-        "text": "Move it into the directory where you want the data, then hand it to wget:",
+        "text": "Place the text file in the directory where you would like to download the data. In your terminal, run:",
         "command": "wget -c -i spam_nrc_sci_urls.txt"
       },
       {
-        "text": "On macOS, where wget is not installed by default, curl does the same job:",
+        "text": "On macOS, use curl instead and run:",
         "command": "xargs -n1 curl -OC- < spam_nrc_sci_urls.txt"
       }
     ],
-    "footnote": "Both commands resume a partial file rather than starting it again, so a dropped connection costs you nothing \u2014 rerun the same line and it picks up where it stopped. Check you have the disk space first, and expect the transfer to take hours rather than minutes."
+    "footnote": ""
   },
   "products": {
     "sci": "Science mosaic",
