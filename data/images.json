@@ -1,9 +1,9 @@
 {
   "base": "https://web.corral.tacc.utexas.edu/unicorn/Images/CEERS/",
-  "note": "NIRCam mosaics only. HST ACS and WFC3 mosaics sit in the same directory but are not listed here and must not be added: they belong to another team and are not ours to redistribute.",
+  "note": "",
   "bulk_help": {
     "title": "Using the \u2193 ALL buttons",
-    "intro": "Each \u2193 ALL button saves a list of URLs rather than the files themselves. A single column is twenty mosaics at 2.5 GB apiece \u2014 about 50 GB \u2014 which is far more than a browser will fetch in one go.",
+    "intro": "Each \u2193 ALL button saves a list of URLs to a text file for download management.",
     "steps": [
       {
         "text": "Click \u2193 ALL at the top of the column you want. A small text file lands in your downloads: spam_nrc_sci_urls.txt for the science mosaics, spam_nrc_err_urls.txt or spam_nrc_wht_urls.txt for the error and weight maps. It holds one URL per line and nothing else.",
