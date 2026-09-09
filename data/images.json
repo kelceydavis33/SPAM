@@ -1,6 +1,7 @@
 {
   "base": "https://web.corral.tacc.utexas.edu/unicorn/Images/CEERS/",
   "note": "NIRCam mosaics only. HST ACS and WFC3 mosaics sit in the same directory but are not listed here and must not be added: they belong to another team and are not ours to redistribute.",
+  "bulk_note": "Each \u2193 ALL button saves a plain list of URLs rather than the files themselves \u2014 twenty mosaics at 2.5 GB apiece is far more than a browser will fetch in one go. Feed the list to a downloader instead: wget -c -i spam_nrc_sci_urls.txt, or xargs -n1 curl -OC- < spam_nrc_sci_urls.txt",
   "products": {
     "sci": "Science mosaic",
     "err": "Error map",
