@@ -8,7 +8,8 @@ index.html                          the whole site, five tabs
 assets/style.css
 assets/app.js                       tabs, JSON loading, filter coverage plot
 data/team.json                      edit to change the Team tab
-data/catalogs.json                  edit to change the Catalogs tab
+data/catalogs.json                  release info + citations for the Data releases tab
+data/images.json                    filter list + mosaic filenames for the download table
 data/papers.json                    edit to change the Papers tab
 data/arxiv.json                     written by the workflow, do not hand-edit
 scripts/update_arxiv.py             the arXiv collector
@@ -33,16 +34,27 @@ usually under a minute.
 `team.json` is a list of groups, each with a list of members. Add, remove or
 reorder groups freely; the headings come from the `group` field.
 
-`catalogs.json` is a list of releases. Leave `download`, `doi` or `readme`
-as `""` and that button just won't render.
+`catalogs.json` describes where the catalogs live and what to cite. Bump
+`version` when a new release goes up; add an entry to `citations` when a paper
+appears, and fill in its `url` once there is one.
 
-**Where to actually put the catalog files.** Not in this repo. GitHub caps
-individual files at 100 MB and asks you to stay under 1 GB per repo, and Pages
-bandwidth is not meant for bulk data. Put releases on
-[Zenodo](https://zenodo.org) — free, no size problem in practice, and each
-version gets its own DOI so papers can cite the exact catalog they used. Then
-point `download` and `doi` at the Zenodo record. MAST is the other obvious home
-once the data are archived there.
+`images.json` drives the mosaic download table. `base` is the directory URL on
+the TACC server, and each filter carries the exact filenames for its science,
+error and weight maps. To add a filter, copy an existing block and change the
+name, program, pivot wavelength and filenames.
+
+**The HST mosaics are deliberately absent from `images.json`.** The same server
+directory also holds ACS (F435W, F606W, F814W) and WFC3 (F105W, F125W, F140W,
+F160W) mosaics that belong to another team. Do not add them, and be careful
+when regenerating the file that a glob over the directory does not sweep them
+back in.
+
+**Where the catalog files themselves live.** Not in this repo. GitHub caps
+individual files at 100 MB and Pages bandwidth is not meant for bulk data.
+Catalogs are served from the TACC corral host and indexed at
+<https://astrosteven.github.io/spam/catalogs>. A Zenodo deposit is still worth
+doing for the released versions, since each one gets a DOI that papers can cite
+exactly.
 
 ## The arXiv tab
 
