@@ -1,7 +1,25 @@
 {
   "base": "https://web.corral.tacc.utexas.edu/unicorn/Images/CEERS/",
   "note": "NIRCam mosaics only. HST ACS and WFC3 mosaics sit in the same directory but are not listed here and must not be added: they belong to another team and are not ours to redistribute.",
-  "bulk_note": "Each \u2193 ALL button saves a plain list of URLs rather than the files themselves \u2014 twenty mosaics at 2.5 GB apiece is far more than a browser will fetch in one go. Feed the list to a downloader instead: wget -c -i spam_nrc_sci_urls.txt, or xargs -n1 curl -OC- < spam_nrc_sci_urls.txt",
+  "bulk_help": {
+    "title": "Using the \u2193 ALL buttons",
+    "intro": "Each \u2193 ALL button saves a list of URLs rather than the files themselves. A single column is twenty mosaics at 2.5 GB apiece \u2014 about 50 GB \u2014 which is far more than a browser will fetch in one go.",
+    "steps": [
+      {
+        "text": "Click \u2193 ALL at the top of the column you want. A small text file lands in your downloads: spam_nrc_sci_urls.txt for the science mosaics, spam_nrc_err_urls.txt or spam_nrc_wht_urls.txt for the error and weight maps. It holds one URL per line and nothing else.",
+        "command": ""
+      },
+      {
+        "text": "Move it into the directory where you want the data, then hand it to wget:",
+        "command": "wget -c -i spam_nrc_sci_urls.txt"
+      },
+      {
+        "text": "On macOS, where wget is not installed by default, curl does the same job:",
+        "command": "xargs -n1 curl -OC- < spam_nrc_sci_urls.txt"
+      }
+    ],
+    "footnote": "Both commands resume a partial file rather than starting it again, so a dropped connection costs you nothing \u2014 rerun the same line and it picks up where it stopped. Check you have the disk space first, and expect the transfer to take hours rather than minutes."
+  },
   "products": {
     "sci": "Science mosaic",
     "err": "Error map",
