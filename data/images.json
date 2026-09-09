@@ -6,7 +6,7 @@
     "intro": "Each \u2193 ALL button saves a list of URLs to a text file for download management.",
     "steps": [
       {
-        "text": "Click \u2193 ALL at the top of the column you want. This downloads a text file: spam_nrc_sci_urls.txt for the science mosaics, spam_nrc_err_urls.txt or spam_nrc_wht_urls.txt for the error and weight maps.",
+        "text": "Click \u2193 ALL at the top of the column you want. This downloads a text file: spam_nrc_sci_urls.txt for the science mosaics, spam_nrc_err_urls.txt for the error maps, and spam_nrc_wht_urls.txt for the weight maps.",
         "command": ""
       },
       {
