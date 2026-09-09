@@ -1,11 +1,19 @@
-[
-  {
-    "name": "DR1 — Photometric catalog",
-    "status": "Coming soon",
-    "description": "Photometry catalog including the SPAM, MINERVA, and legacy CEERS filters as well as public NIRCam parallels in the legacy CEERS footprint.",
-    "citation": "Larson & Davis 2026 (in prep)",
-    "download": "",
-    "doi": "",
-    "readme": ""
-  }
-]
+{
+  "host_url": "https://astrosteven.github.io/spam/catalogs",
+  "host_label": "astrosteven.github.io/spam/catalogs",
+  "version": "v0.98",
+  "summary": "The current release of the SPAM catalog, along with all previous versions, is hosted on the SPAM catalog site. That is where the photometry catalogs and the photometric redshifts live, together with the README, PSFs, depths, completeness, and template libraries.",
+  "contents": [
+    "Photometry — source positions, morphology, and fluxes in every filter (Kron plus twelve circular apertures)",
+    "Photometric redshifts — a fiducial run plus EELG, circular-aperture, broadband-only, and WFC3 variants",
+    "Supporting products — README and data model, segmentation map, empirical PSFs, 5-sigma depths, survey area, and completeness"
+  ],
+  "citation_request": "If you use SPAM data products — the catalogs, the photometric redshifts, or the mosaics below — please cite:",
+  "citations": [
+    {
+      "text": "Larson & Davis et al. 2026",
+      "note": "Survey overview and photometry catalog",
+      "url": ""
+    }
+  ]
+}
