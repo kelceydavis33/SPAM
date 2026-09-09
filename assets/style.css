@@ -616,6 +616,25 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
 
 .filters-table .dl { text-align: center; }
 .filters-table .dl .chip { display: inline-block; }
+
+/* Column header: label, then the bulk-list button under it. */
+.filters-table thead .dl { vertical-align: top; padding-bottom: 0.7rem; }
+.dl__head { display: block; margin-bottom: 0.35rem; }
+
+.chip--all {
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.4rem;
+  border: 1px dashed var(--ink-3);
+  border-radius: 2px;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.chip--all:hover { border-style: solid; border-color: var(--ink); color: var(--ink); }
 .dl__size {
   display: block;
   font-family: var(--mono);
