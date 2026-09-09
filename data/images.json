@@ -1,0 +1,391 @@
+{
+  "base": "https://web.corral.tacc.utexas.edu/unicorn/Images/CEERS/",
+  "note": "NIRCam mosaics only. HST ACS and WFC3 mosaics sit in the same directory but are not listed here and must not be added: they belong to another team and are not ours to redistribute.",
+  "products": {
+    "sci": "Science mosaic",
+    "err": "Error map",
+    "wht": "Weight map"
+  },
+  "filters": [
+    {
+      "name": "F070W",
+      "program": "SPAM",
+      "pivot": 0.704,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f070w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f070w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f070w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F090W",
+      "program": "CEERS",
+      "pivot": 0.901,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f090w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f090w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f090w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F115W",
+      "program": "CEERS",
+      "pivot": 1.154,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f115w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f115w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f115w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F140M",
+      "program": "SPAM + MINERVA",
+      "pivot": 1.404,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f140m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f140m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f140m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F150W",
+      "program": "CEERS",
+      "pivot": 1.501,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f150w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f150w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f150w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F162M",
+      "program": "SPAM + MINERVA",
+      "pivot": 1.626,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f162m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f162m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f162m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F182M",
+      "program": "SPAM + MINERVA",
+      "pivot": 1.845,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f182m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f182m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f182m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F200W",
+      "program": "CEERS",
+      "pivot": 1.99,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f200w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f200w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f200w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F210M",
+      "program": "SPAM + MINERVA",
+      "pivot": 2.093,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f210m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f210m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f210m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F250M",
+      "program": "MINERVA",
+      "pivot": 2.503,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f250m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f250m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f250m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F277W",
+      "program": "CEERS",
+      "pivot": 2.786,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f277w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f277w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f277w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F300M",
+      "program": "SPAM",
+      "pivot": 2.996,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f300m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f300m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f300m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F335M",
+      "program": "SPAM",
+      "pivot": 3.365,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f335m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f335m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f335m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F356W",
+      "program": "CEERS",
+      "pivot": 3.563,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f356w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f356w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f356w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F360M",
+      "program": "SPAM",
+      "pivot": 3.621,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f360m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f360m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f360m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F410M",
+      "program": "CEERS",
+      "pivot": 4.092,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f410m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f410m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f410m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F430M",
+      "program": "SPAM",
+      "pivot": 4.28,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f430m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f430m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f430m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F444W",
+      "program": "CEERS",
+      "pivot": 4.421,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f444w_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f444w_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f444w_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F460M",
+      "program": "MINERVA",
+      "pivot": 4.624,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f460m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f460m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f460m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    },
+    {
+      "name": "F480M",
+      "program": "SPAM",
+      "pivot": 4.834,
+      "files": {
+        "sci": {
+          "file": "ceers-spam_nrc_f480m_sci.fits",
+          "size": "2.5 GB"
+        },
+        "err": {
+          "file": "ceers-spam_nrc_f480m_err.fits",
+          "size": "2.5 GB"
+        },
+        "wht": {
+          "file": "ceers-spam_nrc_f480m_wht.fits",
+          "size": "2.5 GB"
+        }
+      }
+    }
+  ]
+}
