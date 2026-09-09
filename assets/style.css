@@ -662,3 +662,89 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
   .filters-table__program { display: none; }
   .filters-table thead th:nth-child(2) { display: none; }
 }
+
+/* ── How-to block under the mosaic table ────────────────────── */
+.howto {
+  margin-top: 1.5rem;
+  padding: 1.3rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--wl-3);
+  border-radius: 3px;
+}
+
+.howto__title {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.7rem;
+}
+
+.howto__intro {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  max-width: 44rem;
+}
+
+.howto__steps {
+  margin: 0;
+  padding-left: 1.2rem;
+  counter-reset: none;
+}
+.howto__steps > li { margin-bottom: 1rem; }
+.howto__steps > li:last-child { margin-bottom: 0; }
+.howto__steps::marker { color: var(--ink-3); }
+
+.howto__text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  max-width: 44rem;
+}
+
+.howto__cmd {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.6rem 0.5rem 0.8rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  overflow-x: auto;
+}
+.howto__cmd code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.howto__copy {
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  margin-left: auto;
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink-2);
+}
+.howto__copy:hover { border-color: var(--ink); color: var(--ink); }
+
+.howto__foot {
+  margin: 1.1rem 0 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.82rem;
+  color: var(--ink-3);
+  max-width: 44rem;
+}
