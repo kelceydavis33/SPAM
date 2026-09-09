@@ -38,6 +38,11 @@ reorder groups freely; the headings come from the `group` field.
 `version` when a new release goes up; add an entry to `citations` when a paper
 appears, and fill in its `url` once there is one.
 
+`images.json` also holds the instructions printed under the table. `bulk_help`
+has a `title`, an `intro`, a numbered list of `steps` (each with optional
+`command`, which renders as a copyable code line) and a closing `footnote`.
+Edit the wording there rather than in `index.html`.
+
 `images.json` drives the mosaic download table. `base` is the directory URL on
 the TACC server, and each filter carries the exact filenames for its science,
 error and weight maps. To add a filter, copy an existing block and change the
