@@ -416,7 +416,7 @@ async function renderImages() {
 
   html += `</tbody></table></div>`;
 
-  if (data.bulk_note) html += `<p class="source-note">${escapeHtml(data.bulk_note)}</p>`;
+  if (data.bulk_help) html += helpBlock(data.bulk_help);
   if (data.note) html += `<p class="source-note">${escapeHtml(data.note)}</p>`;
 
   host.innerHTML = html;
@@ -426,11 +426,58 @@ async function renderImages() {
       const key = button.dataset.product;
       saveUrlList(urlsFor(data, key), `spam_nrc_${key}_urls.txt`);
       // Confirm in place; the browser gives no feedback for a 1 KB text file.
-      const original = button.textContent;
-      button.textContent = "\u2713 SAVED";
-      setTimeout(() => { button.textContent = original; }, 2000);
+      flash(button, "\u2713 SAVED");
     });
   }
+
+  for (const button of host.querySelectorAll(".howto__copy")) {
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.command);
+        flash(button, "Copied");
+      } catch (error) {
+        flash(button, "Select it");
+      }
+    });
+  }
+}
+
+/* Instructions for the bulk buttons, with each command copyable. */
+function helpBlock(help) {
+  let html = `<div class="howto">`;
+  if (help.title) html += `<h3 class="howto__title">${escapeHtml(help.title)}</h3>`;
+  if (help.intro) html += `<p class="howto__intro">${escapeHtml(help.intro)}</p>`;
+
+  if (help.steps && help.steps.length) {
+    html += `<ol class="howto__steps">`;
+    for (const step of help.steps) {
+      html += `<li><p class="howto__text">${escapeHtml(step.text)}</p>`;
+      if (step.command) {
+        html += `<div class="howto__cmd">`;
+        html += `<code>${escapeHtml(step.command)}</code>`;
+        html += `<button class="howto__copy" type="button" `;
+        html += `data-command="${escapeHtml(step.command)}">Copy</button>`;
+        html += `</div>`;
+      }
+      html += `</li>`;
+    }
+    html += `</ol>`;
+  }
+
+  if (help.footnote) html += `<p class="howto__foot">${escapeHtml(help.footnote)}</p>`;
+  return html + `</div>`;
+}
+
+/* Swap a button's label briefly, then put it back. */
+function flash(button, message) {
+  if (button.dataset.busy) return;
+  const original = button.textContent;
+  button.dataset.busy = "1";
+  button.textContent = message;
+  setTimeout(() => {
+    button.textContent = original;
+    delete button.dataset.busy;
+  }, 2000);
 }
 
 /* Sum the per-file sizes in a column, so the header can warn how much
