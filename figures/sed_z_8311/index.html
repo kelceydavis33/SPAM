@@ -5,9 +5,14 @@
 <title>Redshifted SED</title>
 <style>
 body { font-family: sans-serif; margin: 30px; }
-.row { display: flex; gap: 20px; flex-wrap: wrap; }
-figure { margin: 0; }
-img { width: 640px; max-width: 100%; }
+.row { display: flex; gap: 20px; align-items: flex-start; }
+figure { margin: 0; flex: 1 1 0; min-width: 0; }
+img { width: 100%; height: auto; display: block; }
+
+@media (max-width: 640px) {
+  .row { flex-wrap: wrap; }
+  figure { flex-basis: 100%; }
+}
 figcaption { text-align: center; margin-top: 6px; }
 .controls { margin: 16px 0; display: flex; align-items: center; gap: 12px; }
 #slider { width: 500px; }
