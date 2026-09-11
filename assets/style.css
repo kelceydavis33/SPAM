@@ -758,3 +758,15 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) 5rem; }
   background: var(--card);
 }
 @media (max-width: 900px) { .sed-embed { height: 1080px; } }
+
+/* ── Spectroscopic redshift catalog ─────────────────────────── */
+.specz__action { margin: 0 0 0.9rem; }
+.specz__action .chip { font-size: 0.76rem; padding: 0.35rem 0.7rem; }
+
+.specz__note {
+  margin: 0;
+  max-width: 44rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
