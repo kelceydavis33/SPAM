@@ -340,6 +340,37 @@ async function renderRelease() {
   host.innerHTML = html;
 }
 
+/* Spectroscopic redshift catalog: one CSV, served from the repo root. */
+async function renderSpecz() {
+  const host = document.getElementById("specz-catalog");
+  if (!host) return;
+
+  let data;
+  try {
+    data = await loadJson("data/catalogs.json");
+  } catch (error) {
+    showError(host, "data/catalogs.json");
+    return;
+  }
+
+  // No "specz" block in the JSON means the section is simply not shown.
+  const specz = data.specz;
+  if (!specz || !specz.file) return;
+
+  let html = `<section class="subsection">`;
+  html += `<h2 class="subsection__title">${escapeHtml(specz.title || "Spectroscopic redshifts")}</h2>`;
+  html += `<p class="specz__action">`;
+  html += `<a class="chip chip--download" href="${escapeHtml(specz.file)}" download>`;
+  html += `${escapeHtml(specz.button || specz.file)}</a>`;
+  html += `</p>`;
+  if (specz.description) {
+    html += `<p class="specz__note">${escapeHtml(specz.description)}</p>`;
+  }
+  html += `</section>`;
+
+  host.innerHTML = html;
+}
+
 /* Reduced mosaics: one row per filter, a button per data product.
 
    The manifest lists NIRCam only. The same directory on the server also
@@ -696,6 +727,7 @@ async function renderArxiv() {
 }
 
 renderRelease();
+renderSpecz();
 renderImages();
 renderTeam();
 renderPapers();
