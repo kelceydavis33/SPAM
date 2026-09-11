@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kelceydavis33.github.io/SPAM/sitemap.xml
