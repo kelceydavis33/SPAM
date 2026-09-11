@@ -3,8 +3,7 @@
   "host_label": "astrosteven.github.io/spam/catalogs",
   "version": "v0.98",
   "summary": "A complete photometric catalog, reduced from all available SPAM, MINERVA, and CEERS filters, is hosted on the SPAM catalog website below. This includes photometric redshifts and associated templates.",
-  "contents": [
-  ],
+  "contents": [],
   "citation_request": "If you use SPAM team products, the catalogs, the photometric redshifts, or the reduced images below, please cite:",
   "citations": [
     {
@@ -12,5 +11,11 @@
       "note": "Survey overview and photometry catalog",
       "url": ""
     }
-  ]
+  ],
+  "specz": {
+    "title": "Spectroscopic Redshift Catalog",
+    "file": "SPAM_Specz_Catalog.csv",
+    "button": "\u2193 SPAM_Specz_Catalog.csv",
+    "description": "This spectroscopic redshift catalog includes columns for the SPAM ID, RA, DEC, photometric redshift (ZA), photometric redshift errors (ZL68, ZU68, ZL95, ZU95), spectroscopic redshift (ZSPEC), and spectroscopic redshift grade (ZSPEC_VETTED, where robust = 2). Redshifts come from a variety of datasets as described in the SPAM overview paper. If you use this catalog, please cite Larson & Davis et al. 2026."
+  }
 }
