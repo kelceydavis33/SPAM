@@ -27,21 +27,6 @@ ARXIV_API = "https://export.arxiv.org/api/query"
 ADS_API = "https://api.adsabs.harvard.edu/v1/search/query"
 ATOM = "{http://www.w3.org/2005/Atom}"
 
-# The tags a paper can carry, and how each one is recognised.
-#
-# "match" is checked against the title and abstract only. Any one hit is
-# enough. "exclude" is checked first and vetoes the tag outright -- both
-# programs share a name with something else in the literature, and the name
-# collision is the only thing these guards exist to catch.
-#
-# A paper can earn both tags. Everything that earns none is discarded.
-# A paper must place itself in this field before any tag is considered. Both
-# program names are shared with instruments elsewhere in astronomy -- the
-# Hayabusa2 MINERVA-II rovers, the SPAM radio pipeline -- and none of those
-# papers has any reason to mention JWST, NIRCam, CEERS or medium bands.
-#
-# This is the main defence. The per-program "exclude" lists below are a second
-# layer for collisions that do occur in JWST-adjacent papers.
 # A paper must place itself in this field before an ambiguous name in it will
 # be read as one of ours. Deliberately no bare "JWST" here: almost every
 # exoplanet abstract mentions JWST somewhere, which let through papers using
@@ -136,24 +121,43 @@ IGNORE = [
 
 
 def classify(paper):
-    """Return the tags a paper earns from its own title and abstract."""
-    text = (paper.get("title") or "") + "\n" + (paper.get("abstract") or "")
+    """Return the tags a paper earns from its own title and abstract.
 
-    def hits(patterns):
-        return any(re.search(p, text, re.IGNORECASE) for p in patterns)
+    A title naming exactly one of the programs wins outright: the paper is
+    about that program, and the other name appearing somewhere in the abstract
+    is background rather than a second subject.
+    """
+    title = paper.get("title") or ""
+    text = title + "\n" + (paper.get("abstract") or "")
 
-    in_context = hits(CONTEXT)
+    def hits(patterns, where):
+        return any(re.search(p, where, re.IGNORECASE) for p in patterns)
+
+    # Context is judged on the whole record. Plenty of legitimate titles name a
+    # program without room for NIRCam or CEERS beside it.
+    in_context = hits(CONTEXT, text)
+
     tags = []
+    from_title = []
 
     for name, rules in PROGRAMS.items():
-        if hits(rules["exclude"]):
+        if hits(rules["exclude"], text):
             continue
-        if hits(rules["certain"]):
-            tags.append(name)
-        elif in_context and hits(rules["ambiguous"]):
-            tags.append(name)
+        if not (hits(rules["certain"], text)
+                or (in_context and hits(rules["ambiguous"], text))):
+            continue
+
+        tags.append(name)
+
+        if (hits(rules["certain"], title)
+                or (in_context and hits(rules["ambiguous"], title))):
+            from_title.append(name)
+
+    if len(from_title) == 1:
+        return from_title
 
     return tags
+
 
 def arxiv_fetch(query, max_results=50, attempts=3):
     """Run one arXiv query and return the raw Atom XML.
