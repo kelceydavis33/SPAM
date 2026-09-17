@@ -28,21 +28,24 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 # Queries are grouped by what they catch. A paper can match several groups and
 # carries every tag it matched, so the page can filter on them.
 #
-# Two name collisions shape these. "SPAM" hits the e-mail filtering literature,
-# so it is always paired with a term only this field uses. "MINERVA" is also the
-# Miniature Exoplanet Radial Velocity Array, so it is never searched alone.
+# Restricting to astro-ph does the heavy lifting -- it drops the e-mail
+# filtering literature that "SPAM" otherwise drags in. Two in-field name
+# collisions remain and are excluded by name: Intema's Source Peeling and
+# Atmospheric Modeling pipeline, and the MINERVA-Australis RV array.
+#
+# Written out as an explicit OR list rather than "cat:astro-ph", which matches
+# only the legacy pre-2007 archive designation and would return nearly nothing.
+ASTRO = ("(cat:astro-ph.GA OR cat:astro-ph.CO OR cat:astro-ph.EP OR "
+         "cat:astro-ph.HE OR cat:astro-ph.IM OR cat:astro-ph.SR OR cat:astro-ph)")
+
 ARXIV_QUERIES = {
     "SPAM": [
-        'cat:astro-ph.GA AND abs:"SPAM" AND abs:"JWST"',
-        'cat:astro-ph.GA AND abs:"SPAM" AND abs:"CEERS"',
-        'cat:astro-ph.GA AND abs:"SPAM" AND abs:"medium-band"',
+        ASTRO + ' AND abs:"SPAM" ANDNOT abs:"Source Peeling"',
         'abs:"Star-formation from Photometry through the Addition of Medium-bands"',
         'abs:"GO 8559" OR abs:"Program 8559"',
     ],
-    # Both words, not either. Precise enough to need no other guard, and it is
-    # what finds the MINERVA survey paper, whose abstract names CEERS.
     "MINERVA": [
-        'cat:astro-ph.GA AND abs:"MINERVA" AND abs:"CEERS"',
+        ASTRO + ' AND abs:"MINERVA" ANDNOT abs:"Australis"',
         'abs:"Medium-band Imaging with NIRCam to Explore ReVolutionary Astrophysics"',
         'abs:"GO 7814" OR abs:"Program 7814"',
     ],
@@ -52,7 +55,9 @@ ARXIV_QUERIES = {
 # text instead -- see ADS_QUERIES below. An abstract-level net wide enough to
 # catch them would return most medium-band imaging work regardless of field.
 
-RESULTS_PER_QUERY = 60
+# Results come back newest first, so a cap that the match count outgrows
+# silently drops the oldest papers off the end of the feed.
+RESULTS_PER_QUERY = 200
 
 # full: covers title, abstract, body and acknowledgements. database:astronomy
 # keeps the physics and general-science corpus out.
