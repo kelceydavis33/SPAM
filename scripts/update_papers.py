@@ -42,41 +42,54 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 #
 # This is the main defence. The per-program "exclude" lists below are a second
 # layer for collisions that do occur in JWST-adjacent papers.
+# A paper must place itself in this field before an ambiguous name in it will
+# be read as one of ours. Deliberately no bare "JWST" here: almost every
+# exoplanet abstract mentions JWST somewhere, which let through papers using
+# the MINERVA array and SPAM-like limb-darkening coefficients. Both programs
+# are NIRCam medium-band surveys, so a paper actually using their data says
+# NIRCam, CEERS or medium band.
 CONTEXT = [
     r"\bCEERS\b",
-    r"\bJWST\b",
-    r"James Webb",
     r"\bNIRCam\b",
     r"medium[\s-]?bands?\b",
 ]
 
-# The tags a paper can carry, and how each one is recognised.
+# The tags a paper can carry, and how each one is recognised, against the
+# title and abstract only.
 #
-# "match" is checked against the title and abstract only. Any one hit is
-# enough. "exclude" is checked first and vetoes the tag outright.
+#   certain   -- names nothing else in the literature shares. Enough on its own.
+#   ambiguous -- the bare acronym. Only counts inside CONTEXT.
+#   exclude   -- vetoes the tag outright, checked before either.
 #
 # A paper can earn both tags. Everything that earns none is discarded.
 PROGRAMS = {
     "SPAM": {
-        "match": [
-            r"\bSPAM\b",
+        "certain": [
             r"Star[\s-]?formation from Photometry through the Addition of Medium[\s-]?bands",
             r"\b(?:GO|PID|Program|JWST-GO)[\s#-]*8559\b",
         ],
-        # Intema's Source Peeling and Atmospheric Modeling radio pipeline.
+        "ambiguous": [
+            r"\bSPAM\b",
+        ],
+        # Intema's Source Peeling and Atmospheric Modeling radio pipeline, and
+        # the Synthetic Photometry Atmosphere Model limb-darkening coefficients.
         "exclude": [
             r"Source Peeling",
             r"SPAM pipeline",
+            r"SPAM[\s-]?like",
+            r"limb[\s-]?darkening",
         ],
     },
     "MINERVA": {
-        "match": [
-            r"\bMINERVA\b",
+        "certain": [
             r"Medium[\s-]?band Imaging with NIRCam to Explore ReVolutionary Astrophysics",
             r"\b(?:GO|PID|Program|JWST-GO)[\s#-]*7814\b",
         ],
-        # The Miniature Exoplanet Radial Velocity Array, and the Hayabusa2
-        # MINERVA-II rovers.
+        "ambiguous": [
+            r"\bMINERVA\b",
+        ],
+        # The Miniature Exoplanet Radial Velocity Array and its Australis arm,
+        # and the Hayabusa2 MINERVA-II rovers.
         "exclude": [
             r"MINERVA[\s-]?Australis",
             r"Miniature Exoplanet Radial Velocity Array",
@@ -84,7 +97,6 @@ PROGRAMS = {
         ],
     },
 }
-
 
 # Candidate searches. These only have to find the paper -- PROGRAMS decides
 # whether it stays. Both fields are searched because a survey paper puts the
@@ -127,20 +139,21 @@ def classify(paper):
     """Return the tags a paper earns from its own title and abstract."""
     text = (paper.get("title") or "") + "\n" + (paper.get("abstract") or "")
 
-    # No sign it is about this field at all, so no name in it can be ours.
-    if not any(re.search(p, text, re.IGNORECASE) for p in CONTEXT):
-        return []
+    def hits(patterns):
+        return any(re.search(p, text, re.IGNORECASE) for p in patterns)
 
+    in_context = hits(CONTEXT)
     tags = []
 
     for name, rules in PROGRAMS.items():
-        if any(re.search(p, text, re.IGNORECASE) for p in rules["exclude"]):
+        if hits(rules["exclude"]):
             continue
-        if any(re.search(p, text, re.IGNORECASE) for p in rules["match"]):
+        if hits(rules["certain"]):
+            tags.append(name)
+        elif in_context and hits(rules["ambiguous"]):
             tags.append(name)
 
     return tags
-
 
 def arxiv_fetch(query, max_results=50, attempts=3):
     """Run one arXiv query and return the raw Atom XML.
