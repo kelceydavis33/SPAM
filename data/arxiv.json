@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T21:39:41.413371+00:00",
+  "generated_at": "2026-09-17T21:47:52.108391+00:00",
   "full_text_search": false,
   "tags": [
     "SPAM",
@@ -48,28 +48,6 @@
       "source": "ads",
       "tags": [
         "MINERVA"
-      ]
-    },
-    {
-      "id": "2024ESS.....560907D",
-      "title": "Gliese 12 b, A Temperate Earth-sized Planet at 12 Parsecs Discovered with TESS and CHEOPS",
-      "authors": "Dholakia, Shishir, Palethorpe, Larissa, Venner, Alexander, Mortier, Annelies",
-      "published": "2024-04-01",
-      "url": "https://ui.adsabs.harvard.edu/abs/2024ESS.....560907D",
-      "source": "ads",
-      "tags": [
-        "MINERVA"
-      ]
-    },
-    {
-      "id": "2022eas..conf.1794M",
-      "title": "ExoTETHyS: SAIL on a TRIP with BOATS",
-      "authors": "Morello, Giuseppe",
-      "published": "2022-07-01",
-      "url": "https://ui.adsabs.harvard.edu/abs/2022eas..conf.1794M",
-      "source": "ads",
-      "tags": [
-        "SPAM"
       ]
     }
   ]
