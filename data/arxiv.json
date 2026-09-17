@@ -1,20 +1,340 @@
 {
-  "generated_at": "2026-09-07T11:31:47.406429+00:00",
-  "full_text_search": false,
+  "generated_at": "2026-09-17T21:05:01.992307+00:00",
+  "full_text_search": true,
   "tags": [
     "SPAM",
-    "MINERVA"
+    "MINERVA",
+    "Full text"
   ],
   "papers": [
     {
+      "id": "2606.02698",
+      "title": "Toward Unbreaking the Universe: MINERVA Measurements of Color Gradients in Massive Quiescent Galaxies Can Help Ease Too-early Star Formation Tensions",
+      "authors": "Cutler, Sam E., Robbins, Luke, Marchesini, Danilo, Suess, Katherine A., et al.",
+      "published": "2026-09-01",
+      "url": "https://arxiv.org/abs/2606.02698",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2609.02558",
+      "title": "Constraining reionization-era Ly$\u03b1$ escape with JELS-MUSE: a highly complete H$\u03b1$-selected sample at $z\\sim6.1$",
+      "authors": "Patrick, A. L., Duncan, K. J., Li, Z., Pirie, C. A., et al.",
+      "published": "2026-09-01",
+      "url": "https://arxiv.org/abs/2609.02558",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2606.02685",
+      "title": "A Steep-extinction Quasi-stellar Object at z = 4.6: JWST Evidence for Abundant Small Dust Grains",
+      "authors": "Li, Mingyu, Cai, Zheng, Maiolino, Roberto, Sun, Fengwu, et al.",
+      "published": "2026-09-01",
+      "url": "https://arxiv.org/abs/2606.02685",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2608.07461",
+      "title": "A clear detection of proper motion confirms that the claimed $\\mathbf{z\\simeq32}$ galaxy candidate, \"Capotauro'', is a Y-type brown dwarf",
+      "authors": "Liu, F.-Y. F., McLeod, D. J., Sutlieff, B. J., Dupuy, T. J., et al.",
+      "published": "2026-08-01",
+      "url": "https://arxiv.org/abs/2608.07461",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2608.26461",
+      "title": "A radio continuum view of Stephan's Quintet: age, dynamics and origin of the shock",
+      "authors": "Rajpurohit, K., O'Sullivan, E., Schellenberger, G., Botteon, A., et al.",
+      "published": "2026-08-01",
+      "url": "https://arxiv.org/abs/2608.26461",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2608.30011",
+      "title": "Caught Napping by JWST UNCOVER+MegaScience: Constraining bursty star formation histories and number densities of mini-quenched galaxies at redshifts 4-7",
+      "authors": "Khullar, Gourav, Bezanson, Rachel, Suess, Katherine A., Mitsuhashi, Ikki, et al.",
+      "published": "2026-08-01",
+      "url": "https://arxiv.org/abs/2608.30011",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2606.17271",
+      "title": "Black Hole Stars Across the Universe: Identifying Central Engine Dominated Little Red Dots at $z\\sim1.5-9.5$",
+      "authors": "Weibel, Andrea, Naidu, Rohan P., Oesch, Pascal A., de Graaff, Anna, et al.",
+      "published": "2026-06-01",
+      "url": "https://arxiv.org/abs/2606.17271",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2601.11515",
+      "title": "Spectroscopic Confirmation of a Large and Luminous Galaxy with Weak Emission Lines at z = 13.53",
+      "authors": "Donnan, Callum T., McLeod, Derek J., McLure, Ross J., Dunlop, James S., et al.",
+      "published": "2026-05-01",
+      "url": "https://arxiv.org/abs/2601.11515",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2507.13448",
+      "title": "Dwarf Galaxies at Cosmic Noon: New JWST Constraints on Satellite Models and Subhalo Tidal Evolution",
+      "authors": "Wan, Jenny T., Mansfield, Philip, Suess, Katherine A., Wang, Yunchong, et al.",
+      "published": "2026-05-01",
+      "url": "https://arxiv.org/abs/2507.13448",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2604.16666",
+      "title": "A search for the first galaxies across $&gt;0.6$ deg$^2$ of JWST imaging: new evidence for a rapid decline in star-formation activity at $z&gt;12$",
+      "authors": "McLeod, D. J., Dunlop, J. S., McLure, R. J., Donnan, C. T., et al.",
+      "published": "2026-04-01",
+      "url": "https://arxiv.org/abs/2604.16666",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2603.28863",
+      "title": "Something Bright at the Edge of Everything: A Uniquely JWST-dark Radio Source in COSMOS",
+      "authors": "Li, Mingyu",
+      "published": "2026-04-01",
+      "url": "https://arxiv.org/abs/2603.28863",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2602.23310",
+      "title": "Extreme Emission Line Galaxies in CEERS Are Powered by Star Formation, not AGN",
+      "authors": "Davis, Kelcey, Brooks, Madisyn, Trump, Jonathan R., Fern\u00e1ndez, Vital, et al.",
+      "published": "2026-02-01",
+      "url": "https://arxiv.org/abs/2602.23310",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2601.15954",
+      "title": "JWST Advanced Deep Extragalactic Survey (JADES) Data Release 5: NIRCam Imaging in GOODS-S and GOODS-N",
+      "authors": "Johnson, Benjamin D., Robertson, Brant E., Eisenstein, Daniel J., Tacchella, Sandro, et al.",
+      "published": "2026-01-01",
+      "url": "https://arxiv.org/abs/2601.15954",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2507.03124",
+      "title": "Earliest Galaxy Evolution in the CANUCS+Technicolor Fields: Galaxy Properties at z \u223c 10\u250016 Seen with the Full NIRCam Medium- and Broadband Filters",
+      "authors": "Asada, Yoshihisa, Willott, Chris J., Muzzin, Adam, Brada\u010d, Maru\u0161a, et al.",
+      "published": "2026-01-01",
+      "url": "https://arxiv.org/abs/2507.03124",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2504.10572",
+      "title": "The Structure and Formation Histories of Low-mass Quiescent Galaxies in the A2744 Cluster Environment",
+      "authors": "Cutler, Sam E., Weaver, John R., Whitaker, Katherine E., Greene, Jenny E., et al.",
+      "published": "2025-11-01",
+      "url": "https://arxiv.org/abs/2504.10572",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2504.06334",
+      "title": "UNCOVER/MegaScience: No Evidence of Environmental Quenching in a z \u223c 2.6 Protocluster",
+      "authors": "Pan, Richard, Suess, Katherine A., Marchesini, Danilo, Wang, Bingjie, et al.",
+      "published": "2025-09-01",
+      "url": "https://arxiv.org/abs/2504.06334",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
       "id": "2507.19706",
       "title": "MINERVA: A NIRCam Medium Band and MIRI Imaging Survey to Unlock the Hidden Gems of the Distant Universe",
-      "authors": "Adam Muzzin, Katherine A. Suess, Danilo Marchesini, Luke Robbins, et al.",
-      "published": "2025-07-25T22:51:37Z",
+      "authors": "Muzzin, Adam, Suess, Katherine A., Marchesini, Danilo, Robbins, Luke, et al.",
+      "published": "2025-07-01",
       "url": "https://arxiv.org/abs/2507.19706",
-      "source": "arxiv",
+      "source": "ads",
       "tags": [
-        "MINERVA"
+        "Full text"
+      ]
+    },
+    {
+      "id": "2505.10632",
+      "title": "Measuring Emission Lines with JWST MegaScience Medium Bands: A New Window into Dust and Star Formation at Cosmic Noon",
+      "authors": "Lorenz, Brian, Suess, Katherine A., Kriek, Mariska, Price, Sedona H., et al.",
+      "published": "2025-07-01",
+      "url": "https://arxiv.org/abs/2505.10632",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2507.23738",
+      "title": "High-order wavefront sensing and control for the Roman Coronagraph Instrument (CGI): architecture and measured performance",
+      "authors": "Cady, Eric, Bowman, Nicholas, Greenbaum, Alexandra Z., Ingalls, James G., et al.",
+      "published": "2025-04-01",
+      "url": "https://arxiv.org/abs/2507.23738",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2025jwst.prop.8559D",
+      "title": "SPAM: Star-formation from Photometry through the Addition of Medium-bands",
+      "authors": "Davis, Kelcey, Larson, Rebecca L., Amorin, Ricardo, Arrabal Haro, Pablo, et al.",
+      "published": "2025-03-01",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025jwst.prop.8559D",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2409.18507",
+      "title": "uGMRT Survey of EXoplanets Around M-dwarfs (GS-EXAM): Radio Observations of GJ 1151",
+      "authors": "Narang, Mayank, Puravankara, Manoj, Vedantham, H. K., Ishwara-Chandra, C. H., et al.",
+      "published": "2024-12-01",
+      "url": "https://arxiv.org/abs/2409.18507",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2306.04676",
+      "title": "Exoplanet spectroscopy with JWST NIRISS: diagnostics and case studies",
+      "authors": "Holmberg, M\u00e5ns, Madhusudhan, Nikku",
+      "published": "2023-09-01",
+      "url": "https://arxiv.org/abs/2306.04676",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2303.17269",
+      "title": "uGMRT observations of the hot-Saturn WASP-69b: Radio-Loud Exoplanet-Exomoon Survey II (RLEES II)",
+      "authors": "Narang, Mayank, Oza, Apurva V., Hakim, Kaustubh, Manoj, P., et al.",
+      "published": "2023-06-01",
+      "url": "https://arxiv.org/abs/2303.17269",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2211.01459",
+      "title": "Spectroscopic Time-series Performance of JWST/NIRSpec from Commissioning Observations",
+      "authors": "Espinoza, N\u00e9stor, \u00dabeda, Leonardo, Birkmann, Stephan M., Ferruit, Pierre, et al.",
+      "published": "2023-01-01",
+      "url": "https://arxiv.org/abs/2211.01459",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2207.13067",
+      "title": "The JWST Early Release Observations",
+      "authors": "Pontoppidan, Klaus M., Barrientes, Jaclyn, Blome, Claire, Braun, Hannah, et al.",
+      "published": "2022-09-01",
+      "url": "https://arxiv.org/abs/2207.13067",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2021SPIE11443E..1VP",
+      "title": "Roman space telescope coronagraph: engineering design and operating concept",
+      "authors": "Poberezhskiy, Ilya, Luchik, Thomas, Zhao, Feng, Frerking, Margaret, et al.",
+      "published": "2021-01-01",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021SPIE11443E..1VP",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "2018SPIE10703E..69H",
+      "title": "Developing new adaptive secondary electronics for the MAPS project",
+      "authors": "Hinz, P. M., Downey, E., Montoya, O. M., Ford, J., et al.",
+      "published": "2018-07-01",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018SPIE10703E..69H",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "1712.06950",
+      "title": "French SKA White Book - The French Community towards the Square Kilometre Array",
+      "authors": "Acero, F., Acquaviva, J.-T., Adam, R., Aghanim, N., et al.",
+      "published": "2017-12-01",
+      "url": "https://arxiv.org/abs/1712.06950",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "astro-ph/0403455",
+      "title": "Evolution since z = 1 of the Morphology-Density Relation for Galaxies",
+      "authors": "Smith, Graham P., Treu, Tommaso, Ellis, Richard S., Moran, Sean M., et al.",
+      "published": "2005-02-01",
+      "url": "https://arxiv.org/abs/astro-ph/0403455",
+      "source": "ads",
+      "tags": [
+        "Full text"
+      ]
+    },
+    {
+      "id": "astro-ph/0303267",
+      "title": "A Wide-Field Hubble Space Telescope Study of the Cluster Cl 0024+16 at z = 0.4. I. Morphological Distributions to 5 Mpc Radius",
+      "authors": "Treu, Tommaso, Ellis, Richard S., Kneib, Jean-Paul, Dressler, Alan, et al.",
+      "published": "2003-07-01",
+      "url": "https://arxiv.org/abs/astro-ph/0303267",
+      "source": "ads",
+      "tags": [
+        "Full text"
       ]
     }
   ]
