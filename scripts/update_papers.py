@@ -21,7 +21,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
-ARXIV_API = "http://export.arxiv.org/api/query"
+ARXIV_API = "https://export.arxiv.org/api/query"
 ADS_API = "https://api.adsabs.harvard.edu/v1/search/query"
 ATOM = "{http://www.w3.org/2005/Atom}"
 
@@ -75,8 +75,13 @@ IGNORE = [
 ]
 
 
-def arxiv_fetch(query, max_results=50):
-    """Run one arXiv query and return the raw Atom XML."""
+def arxiv_fetch(query, max_results=50, attempts=3):
+    """Run one arXiv query and return the raw Atom XML.
+
+    arXiv rejects or drops requests from cloud IPs often enough that a single
+    attempt is not reliable from a CI runner, so each query is retried with a
+    growing pause before it is allowed to count as a failure.
+    """
     params = {
         "search_query": query,
         "start": 0,
@@ -85,9 +90,22 @@ def arxiv_fetch(query, max_results=50):
         "sortOrder": "descending",
     }
     url = ARXIV_API + "?" + urllib.parse.urlencode(params)
-    request = urllib.request.Request(url, headers={"User-Agent": "SPAM-site/1.0"})
-    with urllib.request.urlopen(request, timeout=60) as response:
-        return response.read()
+    request = urllib.request.Request(url, headers={
+        "User-Agent": "SPAM-site/1.0 (+https://github.com/kelceydavis33/SPAM)",
+    })
+
+    last_error = None
+    for attempt in range(attempts):
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                return response.read()
+        except Exception as error:
+            last_error = error
+            print("  attempt", attempt + 1, "failed:", error)
+            if attempt + 1 < attempts:
+                time.sleep(10 * (attempt + 1))
+
+    raise last_error
 
 
 def format_authors(names):
@@ -190,16 +208,29 @@ def add(found, paper, tag):
         found[paper["id"]] = paper
 
 
+def load_previous():
+    """Read the feed already on disk, so a bad run can decline to replace it."""
+    try:
+        with open("data/arxiv.json") as handle:
+            return json.load(handle).get("papers", [])
+    except (OSError, ValueError):
+        return []
+
+
 def main():
     found = {}
+    attempted = 0
+    failed = 0
 
     for tag, queries in ARXIV_QUERIES.items():
         for query in queries:
             print("arXiv [" + tag + "]:", query)
+            attempted += 1
             try:
                 papers = arxiv_parse(arxiv_fetch(query, RESULTS_PER_QUERY))
             except Exception as error:
-                print("  failed:", error)
+                print("  gave up:", error)
+                failed += 1
                 continue
 
             print("  got", len(papers))
@@ -216,10 +247,12 @@ def main():
     else:
         for query in ADS_QUERIES:
             print("ADS:", query)
+            attempted += 1
             try:
                 papers = ads_parse(ads_fetch(query, token))
             except Exception as error:
                 print("  failed:", error)
+                failed += 1
                 continue
 
             print("  got", len(papers))
@@ -230,6 +263,29 @@ def main():
 
     papers = list(found.values())
     papers.sort(key=lambda paper: paper["published"], reverse=True)
+
+    if failed:
+        print(failed, "of", attempted, "queries failed.")
+
+    # A run that found nothing is only trustworthy if every query actually ran.
+    # Otherwise the sensible move is to leave the last good feed in place, and
+    # fail loudly so the Actions run goes red instead of quietly erasing it.
+    previous = load_previous()
+
+    if not papers and failed:
+        raise SystemExit(
+            "Queries failed and nothing was found. Keeping the "
+            + str(len(previous))
+            + " paper(s) already on file."
+        )
+
+    if not papers and previous:
+        raise SystemExit(
+            "Search came back empty but "
+            + str(len(previous))
+            + " paper(s) are on file. Not overwriting. "
+            "Delete data/arxiv.json by hand if they really should go."
+        )
 
     counts = {}
     for paper in papers:
