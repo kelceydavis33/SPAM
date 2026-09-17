@@ -126,6 +126,11 @@ IGNORE = [
 def classify(paper):
     """Return the tags a paper earns from its own title and abstract."""
     text = (paper.get("title") or "") + "\n" + (paper.get("abstract") or "")
+
+    # No sign it is about this field at all, so no name in it can be ours.
+    if not any(re.search(p, text, re.IGNORECASE) for p in CONTEXT):
+        return []
+
     tags = []
 
     for name, rules in PROGRAMS.items():
