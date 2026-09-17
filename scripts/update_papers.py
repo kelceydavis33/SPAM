@@ -35,6 +35,27 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 # collision is the only thing these guards exist to catch.
 #
 # A paper can earn both tags. Everything that earns none is discarded.
+# A paper must place itself in this field before any tag is considered. Both
+# program names are shared with instruments elsewhere in astronomy -- the
+# Hayabusa2 MINERVA-II rovers, the SPAM radio pipeline -- and none of those
+# papers has any reason to mention JWST, NIRCam, CEERS or medium bands.
+#
+# This is the main defence. The per-program "exclude" lists below are a second
+# layer for collisions that do occur in JWST-adjacent papers.
+CONTEXT = [
+    r"\bCEERS\b",
+    r"\bJWST\b",
+    r"James Webb",
+    r"\bNIRCam\b",
+    r"medium[\s-]?bands?\b",
+]
+
+# The tags a paper can carry, and how each one is recognised.
+#
+# "match" is checked against the title and abstract only. Any one hit is
+# enough. "exclude" is checked first and vetoes the tag outright.
+#
+# A paper can earn both tags. Everything that earns none is discarded.
 PROGRAMS = {
     "SPAM": {
         "match": [
@@ -45,6 +66,7 @@ PROGRAMS = {
         # Intema's Source Peeling and Atmospheric Modeling radio pipeline.
         "exclude": [
             r"Source Peeling",
+            r"SPAM pipeline",
         ],
     },
     "MINERVA": {
@@ -53,13 +75,16 @@ PROGRAMS = {
             r"Medium[\s-]?band Imaging with NIRCam to Explore ReVolutionary Astrophysics",
             r"\b(?:GO|PID|Program|JWST-GO)[\s#-]*7814\b",
         ],
-        # The Miniature Exoplanet Radial Velocity Array.
+        # The Miniature Exoplanet Radial Velocity Array, and the Hayabusa2
+        # MINERVA-II rovers.
         "exclude": [
             r"MINERVA[\s-]?Australis",
             r"Miniature Exoplanet Radial Velocity Array",
+            r"MINERVA[\s-]?(?:II|2|I)\b",
         ],
     },
 }
+
 
 # Candidate searches. These only have to find the paper -- PROGRAMS decides
 # whether it stays. Both fields are searched because a survey paper puts the
