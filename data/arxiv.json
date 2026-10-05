@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T12:53:13.987677+00:00",
+  "generated_at": "2026-10-05T13:33:00.416404+00:00",
   "full_text_search": false,
   "tags": [
     "SPAM",
@@ -8,11 +8,11 @@
   "papers": [
     {
       "id": "2606.02698",
-      "title": "Toward Unbreaking the Universe: MINERVA Measurements of Color Gradients in Massive Quiescent Galaxies Can Help Ease Too-early Star Formation Tensions",
-      "authors": "Cutler, Sam E., Robbins, Luke, Marchesini, Danilo, Suess, Katherine A., et al.",
-      "published": "2026-09-01",
+      "title": "Toward Unbreaking the Universe: MINERVA Measurements of Color Gradients in Massive Quiescent Galaxies Can Help Ease Too-Early Star Formation Tensions",
+      "authors": "Sam E. Cutler, Luke Robbins, Danilo Marchesini, Katherine A. Suess, et al.",
+      "published": "2026-06-01T18:00:00Z",
       "url": "https://arxiv.org/abs/2606.02698",
-      "source": "ads",
+      "source": "arxiv",
       "tags": [
         "MINERVA"
       ]
@@ -20,10 +20,10 @@
     {
       "id": "2507.19706",
       "title": "MINERVA: A NIRCam Medium Band and MIRI Imaging Survey to Unlock the Hidden Gems of the Distant Universe",
-      "authors": "Muzzin, Adam, Suess, Katherine A., Marchesini, Danilo, Robbins, Luke, et al.",
-      "published": "2025-07-01",
+      "authors": "Adam Muzzin, Katherine A. Suess, Danilo Marchesini, Luke Robbins, et al.",
+      "published": "2025-07-25T22:51:37Z",
       "url": "https://arxiv.org/abs/2507.19706",
-      "source": "ads",
+      "source": "arxiv",
       "tags": [
         "MINERVA"
       ]
