@@ -1,6 +1,8 @@
 # SPAM: Star-formation from Photometry through the Addition of Medium-bands
 
-Host for SPAM Photometric Catalog from awarded JWST Cycle 4 GO Proposal 8559 COMING 2025/2026
+Host for our team website, which you can find here:
+
+https://kelceydavis33.github.io/SPAM/#overview 
 
 
 ## Abstract
