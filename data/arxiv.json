@@ -1,11 +1,22 @@
 {
-  "generated_at": "2026-10-26T12:17:03.225107+00:00",
+  "generated_at": "2026-10-29T22:03:14.169164+00:00",
   "full_text_search": false,
   "tags": [
     "SPAM",
     "MINERVA"
   ],
   "papers": [
+    {
+      "id": "2610.35570",
+      "title": "SPAM: Survey Overview and JWST/NIRCam Multi-Band Photometry Catalog",
+      "authors": "Rebecca L. Larson, Kelcey Davis, Hollis B. Akins, Steven L. Finkelstein, et al.",
+      "published": "2026-10-26T15:07:36Z",
+      "url": "https://arxiv.org/abs/2610.35570",
+      "source": "arxiv",
+      "tags": [
+        "SPAM"
+      ]
+    },
     {
       "id": "2606.02698",
       "title": "Toward Unbreaking the Universe: MINERVA Measurements of Color Gradients in Massive Quiescent Galaxies Can Help Ease Too-Early Star Formation Tensions",
