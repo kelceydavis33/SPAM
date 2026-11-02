@@ -1,11 +1,22 @@
 {
-  "generated_at": "2026-10-29T22:03:14.169164+00:00",
+  "generated_at": "2026-11-02T14:42:58.283523+00:00",
   "full_text_search": false,
   "tags": [
     "SPAM",
     "MINERVA"
   ],
   "papers": [
+    {
+      "id": "2610.40937",
+      "title": "The Size-Mass Relation and Inside-Out Quenching of Massive Quiescent Galaxies at $2<z<3$ with JWST PRIMER and MINERVA",
+      "authors": "Vaidik Prasal, Yogesh Wadadekar, Pralay Biswas",
+      "published": "2026-10-29T20:13:19Z",
+      "url": "https://arxiv.org/abs/2610.40937",
+      "source": "arxiv",
+      "tags": [
+        "MINERVA"
+      ]
+    },
     {
       "id": "2610.35570",
       "title": "SPAM: Survey Overview and JWST/NIRCam Multi-Band Photometry Catalog",
