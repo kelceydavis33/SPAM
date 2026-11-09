@@ -1,11 +1,22 @@
 {
-  "generated_at": "2026-11-02T14:42:58.283523+00:00",
+  "generated_at": "2026-11-09T15:06:24.217987+00:00",
   "full_text_search": false,
   "tags": [
     "SPAM",
     "MINERVA"
   ],
   "papers": [
+    {
+      "id": "2611.08563",
+      "title": "A combined PRIMER+MINERVA study of the evolution of $\\mathbf{[O\\mbox{III}]+H\u03b2}$ equivalent width from $\\mathbf{z=3}$ to $\\mathbf{z=8.5}$",
+      "authors": "Isaac J. B. Holst, Ross J. McLure, Ryan Begley, Derek J. McLeod, et al.",
+      "published": "2026-11-05T16:11:36Z",
+      "url": "https://arxiv.org/abs/2611.08563",
+      "source": "arxiv",
+      "tags": [
+        "MINERVA"
+      ]
+    },
     {
       "id": "2610.40937",
       "title": "The Size-Mass Relation and Inside-Out Quenching of Massive Quiescent Galaxies at $2<z<3$ with JWST PRIMER and MINERVA",
