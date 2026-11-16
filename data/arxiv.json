@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T15:06:24.217987+00:00",
+  "generated_at": "2026-11-16T14:42:58.127750+00:00",
   "full_text_search": false,
   "tags": [
     "SPAM",
@@ -57,28 +57,6 @@
       "published": "2025-07-25T22:51:37Z",
       "url": "https://arxiv.org/abs/2507.19706",
       "source": "arxiv",
-      "tags": [
-        "MINERVA"
-      ]
-    },
-    {
-      "id": "2025jwst.prop.8559D",
-      "title": "SPAM: Star-formation from Photometry through the Addition of Medium-bands",
-      "authors": "Davis, Kelcey, Larson, Rebecca L., Amorin, Ricardo, Arrabal Haro, Pablo, et al.",
-      "published": "2025-03-01",
-      "url": "https://ui.adsabs.harvard.edu/abs/2025jwst.prop.8559D",
-      "source": "ads",
-      "tags": [
-        "SPAM"
-      ]
-    },
-    {
-      "id": "2025jwst.prop.7814M",
-      "title": "MINERVA: Unlocking the Hidden Gems of the Distant Universe and Completing HST and JWST?s Imaging Legacy with Medium Bands",
-      "authors": "Muzzin, Adam, Marchesini, Danilo, Suess, Katherine, Abraham, Roberto G., et al.",
-      "published": "2025-03-01",
-      "url": "https://ui.adsabs.harvard.edu/abs/2025jwst.prop.7814M",
-      "source": "ads",
       "tags": [
         "MINERVA"
       ]
